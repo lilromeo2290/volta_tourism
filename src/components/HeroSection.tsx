@@ -63,8 +63,9 @@ export default function HeroSection() {
   }, [currentSlide]);
 
   return (
-    <section id="home" className="relative h-screen min-h-[700px] w-full overflow-hidden">
+    <section id="home" className="relative h-screen min-h-[700px] w-full">
       {/* ---- Background slides with crossfade ---- */}
+      <div className="absolute inset-0 overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
@@ -81,6 +82,7 @@ export default function HeroSection() {
           />
         </motion.div>
       </AnimatePresence>
+      </div>
 
       {/* ---- Dark gradient overlay (darker on LEFT) ---- */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
