@@ -153,14 +153,26 @@ export default function MapSection() {
 
         {/* Quick access buttons */}
         <div className="flex flex-wrap justify-center gap-4 mt-8">
-          <Button variant="outline" className="rounded-full px-6 border-[#054906] text-[#054906] hover:bg-[#054906] hover:text-white">
-            <Compass className="w-4 h-4 mr-2" />
-            Get Directions
-          </Button>
-          <Button variant="outline" className="rounded-full px-6 border-[#054906] text-[#054906] hover:bg-[#054906] hover:text-white">
-            <Download className="w-4 h-4 mr-2" />
-            Download Map
-          </Button>
+          <a
+            href="https://www.google.com/maps/dir/?api=1&destination=Ho+Volta+Region+Ghana"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="outline" className="rounded-full px-6 border-[#054906] text-[#054906] hover:bg-[#054906] hover:text-white">
+              <Compass className="w-4 h-4 mr-2" />
+              Get Directions
+            </Button>
+          </a>
+          <a
+            href="https://www.google.com/maps/@6.61,0.47,9z?hl=en"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="outline" className="rounded-full px-6 border-[#054906] text-[#054906] hover:bg-[#054906] hover:text-white">
+              <Download className="w-4 h-4 mr-2" />
+              Download Map
+            </Button>
+          </a>
         </div>
       </div>
     </section>
