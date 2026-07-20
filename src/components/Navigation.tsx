@@ -84,7 +84,7 @@ export default function Navigation() {
               <img
                 src="/vth-logo.jpg"
                 alt="Volta Tourism Hub"
-                className="h-14 w-auto object-contain rounded-lg group-hover:shadow-lg transition-shadow"
+                className="h-20 w-auto object-contain rounded-lg group-hover:shadow-lg transition-shadow"
               />
             </button>
 
@@ -163,7 +163,7 @@ export default function Navigation() {
                   <img
                     src="/vth-logo.jpg"
                     alt="Volta Tourism Hub"
-                    className="h-14 w-auto object-contain rounded-lg"
+                    className="h-20 w-auto object-contain rounded-lg"
                   />
                 </div>
                 <button
