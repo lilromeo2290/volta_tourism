@@ -92,8 +92,25 @@ export default function ContactSection() {
         .filter(Boolean)
         .join("\n");
 
+      // Open email client
       const mailtoLink = `mailto:voltatourismh@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.open(mailtoLink, "_blank");
+
+      // Send copy via WhatsApp
+      const waBody = [
+        `*VTH Contact Form*`,
+        `Name: ${form.name}`,
+        `Email: ${form.email}`,
+        form.phone ? `Phone: ${form.phone}` : "",
+        form.subject ? `Subject: ${form.subject}` : "",
+        "",
+        `Message:`,
+        form.message,
+      ]
+        .filter(Boolean)
+        .join("\n");
+      const waLink = `https://wa.me/233244183058?text=${encodeURIComponent(waBody)}`;
+      window.open(waLink, "_blank");
 
       setSubmitted(true);
       setForm({ name: "", email: "", phone: "", subject: "", message: "" });
