@@ -77,6 +77,24 @@ export default function ContactSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (form.name.trim() && form.email.trim() && form.message.trim()) {
+      const subject = form.subject
+        ? `[VTH Contact] ${form.subject} - from ${form.name}`
+        : `[VTH Contact] Message from ${form.name}`;
+      const body = [
+        `Name: ${form.name}`,
+        `Email: ${form.email}`,
+        form.phone ? `Phone: ${form.phone}` : "",
+        form.subject ? `Subject: ${form.subject}` : "",
+        "",
+        "Message:",
+        form.message,
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      const mailtoLink = `mailto:voltatourismh@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(mailtoLink, "_blank");
+
       setSubmitted(true);
       setForm({ name: "", email: "", phone: "", subject: "", message: "" });
       setTimeout(() => setSubmitted(false), 5000);
