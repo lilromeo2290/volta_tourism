@@ -45,7 +45,7 @@ const navLinks: NavItem[] = [
   { label: "DIRECTORY", href: "#business" },
   { label: "INVEST", href: "#investment" },
   { label: "ABOUT VTH", href: "#community" },
-  { label: "CONTACT", href: "#footer" },
+  { label: "CONTACT", href: "#contact" },
 ];
 
 export default function Navigation() {

@@ -16,6 +16,7 @@ import TripPlannerSection from "@/components/TripPlannerSection";
 import CommunitySection from "@/components/CommunitySection";
 import BusinessDirectorySection from "@/components/BusinessDirectorySection";
 import MediaCenterSection from "@/components/MediaCenterSection";
+import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
 const AIChatbot = dynamic(() => import("@/components/AIChatbot"), { ssr: false });
@@ -39,6 +40,7 @@ export default function Home() {
         <MediaCenterSection />
         <CommunitySection />
         <BusinessDirectorySection />
+        <ContactSection />
       </main>
       <Footer />
       <AIChatbot />
