@@ -1,0 +1,600 @@
+    80→    80→export interface TripPlan {
+    81→    81→  days: number;
+    82→    82→  budget: string;
+    83→    83→  interests: string[];
+    84→    84→  style: string;
+    85→    85→  itinerary: DayPlan[];
+    86→    86→}
+    87→    87→
+    88→    88→export interface DayPlan {
+    89→    89→  day: number;
+    90→    90→  title: string;
+    91→    91→  activities: { time: string; activity: string; location: string; cost: string }[];
+    92→    92→}
+    93→    93→
+    94→    94→// ---- DESTINATIONS ----
+    95→    95→export const destinations: Destination[] = [
+    96→    96→  {
+    97→    97→    id: "wli-falls",
+    98→    98→    name: "Wli Waterfalls",
+    99→    99→    municipality: "Hohoe Municipality",
+   100→   100→    category: "Waterfall",
+   101→   101→    rating: 4.8,
+   102→   102→    distance: "280 km from Accra",
+   103→   103→    travelTime: "4 hours drive",
+   104→   104→    image: "https://images.unsplash.com/photo-1432405972618-c6b0cfba8b23?w=800&q=80",
+   105→   105→    description:
+   106→   106→      "The highest waterfall in West Africa, Wli cascades magnificently through lush tropical forest. The lower falls welcome all visitors with a gentle walk, while the upper falls reward the adventurous with a challenging but breathtaking trek through the Agumatsa Wildlife Sanctuary.",
+   107→   107→    highlights: ["Highest waterfall in West Africa", "Swimming at the base", "Bat colony viewing", "Forest hiking trails"],
+   108→   108→  },
+   109→   109→  {
+   110→   110→    id: "mount-afadja",
+   111→   111→    name: "Mount Afadja",
+   112→   112→    municipality: "Hohoe Municipality",
+   113→   113→    category: "Mountain",
+   114→   114→    rating: 4.7,
+   115→   115→    distance: "275 km from Accra",
+   116→   116→    travelTime: "4 hours drive",
+   117→   117→    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
+   118→   118→    description:
+   119→   119→      "At 885 meters, Mount Afadja is the highest peak in Ghana. The hike to the summit takes you through cloud forests teeming with rare butterflies and birdlife, culminating in panoramic views that stretch across the Volta Region and into Togo.",
+   120→   120→    highlights: ["Highest mountain in Ghana", "Cloud forest ecosystem", "Panoramic summit views", "Bird watching"],
+   121→   121→  },
+   122→   122→  {
+   123→   123→    id: "keta-beach",
+   124→   124→    name: "Keta Beach",
+   125→   125→    municipality: "Keta Municipal",
+   126→   126→    category: "Beach",
+   127→   127→    rating: 4.5,
+   128→   128→    distance: "160 km from Accra",
+   129→   129→    travelTime: "2.5 hours drive",
+   130→   130→    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+   131→   131→    description:
+   132→   132→      "A pristine stretch of golden sand along the Atlantic Ocean, Keta Beach offers serene coastal beauty, spectacular sunsets, and rich fishing culture. The nearby Keta Lagoon Complex is one of West Africa's largest wetland ecosystems.",
+   133→   133→    highlights: ["Golden sand beaches", "Keta Lagoon Complex", "Fishing village tours", "Water sports"],
+   134→   134→  },
+   135→   135→  {
+   136→   136→    id: "tafi-atome",
+   137→   137→    name: "Tafi Atome Monkey Sanctuary",
+   138→   138→    municipality: "Afadjato District",
+   139→   139→    category: "Wildlife",
+   140→   140→    rating: 4.6,
+   141→   141→    distance: "260 km from Accra",
+   142→   142→    travelTime: "3.5 hours drive",
+   143→   143→    image: "https://images.unsplash.com/photo-1549366021-9f761d450615?w=800&q=80",
+   144→   144→    description:
+   145→   145→      "Home to a sacred population of Mona monkeys, Tafi Atome is a community-led conservation success story. Visitors walk through the forest canopy with guides as the habituated monkeys approach freely, creating magical close encounters.",
+   146→   146→    highlights: ["Sacred Mona monkeys", "Community eco-tourism", "Canopy walk", "Cultural immersion"],
+   147→   147→  },
+   148→   148→  {
+   149→   149→    id: "xavi-birds",
+   150→   150→    name: "Xavi Bird Sanctuary",
+   151→   151→    municipality: "Akatsi South",
+   152→   152→    category: "Wildlife",
+   153→   153→    rating: 4.4,
+   154→   154→    distance: "200 km from Accra",
+   155→   155→    travelTime: "3 hours drive",
+   156→   156→    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80",
+   157→   157→    description:
+   158→   158→      "A birdwatcher's paradise nestled along the Volta River, Xavi Bird Sanctuary hosts over 300 bird species. Explore by canoe through flooded forests and savanna wetlands while spotting kingfishers, herons, and rare migratory species.",
+   159→   159→    highlights: ["300+ bird species", "Canoe safari", "Volta River scenery", "Photography paradise"],
+   160→   160→  },
+   161→   161→  {
+   162→   162→    id: "tagbo-falls",
+   163→   163→    name: "Tagbo Falls",
+   164→   164→    municipality: "Hohoe Municipality",
+   165→   165→    category: "Waterfall",
+   166→   166→    rating: 4.5,
+   167→   167→    distance: "275 km from Accra",
+   168→   168→    travelTime: "4 hours drive",
+   169→   169→    image: "https://images.unsplash.com/photo-1445217143695-467124038776?w=800&q=80",
+   170→   170→    description:
+   171→   171→      "Hidden deep in the forest near Liati Wote village, Tagbo Falls requires a rewarding hike through cocoa farms and tropical forest. The waterfall cascades from a height of about 40 meters into a crystal-clear pool perfect for swimming.",
+   172→   172→    highlights: ["Crystal-clear swimming pool", "Forest hiking", "Cocoa farm trails", "Village cultural experience"],
+   173→   173→  },
+   174→   174→  {
+   175→   175→    id: "volta-lake",
+   176→   176→    name: "Lake Volta",
+   177→   177→    municipality: "Multiple Districts",
+   178→   178→    category: "Nature",
+   179→   179→    rating: 4.7,
+   180→   180→    distance: "150 km from Accra",
+   181→   181→    travelTime: "2.5 hours drive",
+   182→   182→    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80",
+   183→   183→    description:
+   184→   184→      "The world's largest artificial reservoir by surface area, Lake Volta stretches over 8,500 square kilometers. Its serene waters, dotted with fishing villages and islands, offer opportunities for boat cruises, fishing, and waterfront relaxation.",
+   185→   185→    highlights: ["World's largest reservoir", "Boat cruises", "Fishing experiences", "Island exploration"],
+   186→   186→  },
+   187→   187→  {
+   188→   188→    id: "kente-weaving",
+   189→   189→    name: "Kente Weaving Villages",
+   190→   190→    municipality: "Ho West District",
+   191→   191→    category: "Culture",
+   192→   192→    rating: 4.8,
+   193→   193→    distance: "170 km from Accra",
+   194→   194→    travelTime: "2.5 hours drive",
+   195→   195→    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
+   196→   196→    description:
+   197→   197→      "Visit the ancestral home of Kente cloth, the iconic hand-woven fabric of the Ewe and Ashanti people. Watch master weavers create intricate patterns on traditional looms, learn the meanings behind each design, and purchase authentic textiles directly from artisans.",
+   198→   198→    highlights: ["Traditional hand-weaving", "Master artisan demonstrations", "Authentic textile purchase", "Cultural significance"],
+   199→   199→  },
+   200→   200→];
+   201→   201→
+   202→   202→// ---- EXPERIENCES ----
+   203→   203→export const experiences: Experience[] = [
+   204→   204→  {
+   205→   205→    id: "exp-nature",
+   206→   206→    title: "Nature & Scenic Beauty",
+   207→   207→    category: "Nature",
+   208→   208→    icon: "Trees",
+   209→   209→    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80",
+   210→   210→    description: "Immerse yourself in pristine forests, cascading waterfalls, and breathtaking mountain vistas that define the Volta Region's natural landscape.",
+   211→   211→  },
+   212→   212→  {
+   213→   213→    id: "exp-adventure",
+   214→   214→    title: "Adventure & Thrills",
+   215→   215→    category: "Adventure",
+   216→   216→    icon: "Mountain",
+   217→   217→    image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&q=80",
+   218→   218→    description: "From mountain climbing to waterfall rappelling, the Volta Region offers heart-pounding adventures for every level of thrill-seeker.",
+   219→   219→  },
+   220→   220→  {
+   221→   221→    id: "exp-culture",
+   222→   222→    title: "Cultural Heritage",
+   223→   223→    category: "Culture",
+   224→   224→    icon: "Landmark",
+   225→   225→    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80",
+   226→   226→    description: "Experience vibrant festivals, traditional drumming, Kente weaving, and the warm hospitality of Ewe communities across the region.",
+   227→   227→  },
+   228→   228→  {
+   229→   229→    id: "exp-wildlife",
+   230→   230→    title: "Wildlife & Safari",
+   231→   231→    category: "Wildlife",
+   232→   232→    icon: "Bird",
+   233→   233→    image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=600&q=80",
+   234→   234→    description: "Encounter sacred monkeys, exotic birds, and diverse ecosystems in community-managed sanctuaries and wetland reserves.",
+   235→   235→  },
+   236→   236→  {
+   237→   237→    id: "exp-coastal",
+   238→   238→    title: "Coastal & Beaches",
+   239→   239→    category: "Coastal",
+   240→   240→    icon: "Waves",
+   241→   241→    image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=600&q=80",
+   242→   242→    description: "Discover pristine Atlantic beaches, serene lagoons, and vibrant fishing communities along the Volta Region's stunning coastline.",
+   243→   243→  },
+   244→   244→  {
+   245→   245→    id: "exp-food",
+   246→   246→    title: "Food & Culinary",
+   247→   247→    category: "Food",
+   248→   248→    icon: "UtensilsCrossed",
+   249→   249→    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80",
+   250→   250→    description: "Savor authentic Ewe cuisine, from banku and tilapia to fresh seafood delicacies, prepared with traditional methods and local ingredients.",
+   251→   251→  },
+   252→   252→  {
+   253→   253→    id: "exp-festivals",
+   254→   254→    title: "Festivals & Events",
+   255→   255→    category: "Festivals",
+   256→   256→    icon: "PartyPopper",
+   257→   257→    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80",
+   258→   258→    description: "Join spectacular traditional festivals like Hogbetsotso, Agbamevoza, and Keta Afenorto that showcase the rich cultural tapestry of the Volta people.",
+   259→   259→  },
+   260→   260→  {
+   261→   261→    id: "exp-photography",
+   262→   262→    title: "Photography Tours",
+   263→   263→    category: "Photography",
+   264→   264→    icon: "Camera",
+   265→   265→    image: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=600&q=80",
+   266→   266→    description: "Capture stunning landscapes, vibrant cultures, and unique wildlife with guided photography tours designed for enthusiasts and professionals.",
+   267→   267→  },
+   268→   268→  {
+   269→   269→    id: "exp-community",
+   270→   270→    title: "Community Tourism",
+   271→   271→    category: "Community",
+   272→   272→    icon: "Users",
+   273→   273→    image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&q=80",
+   274→   274→    description: "Live among local communities, learn traditional crafts, participate in daily life, and create meaningful connections with the people of Volta.",
+   275→   275→  },
+   276→   276→];
+   277→   277→
+   278→   278→// ---- EVENTS ----
+   279→   279→export const events: Event[] = [
+   280→   280→  {
+   281→   281→    id: "ev-hogbetsotso",
+   282→   282→    title: "Hogbetsotso Festival",
+   283→   283→    date: "November 2026",
+   284→   284→    location: "Anloga, Volta Region",
+   285→   285→    category: "Cultural",
+   286→   286→    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80",
+   287→   287→    description: "The grand festival of the Anlo Ewe people commemorating their historic migration from Notsie in Togo. Features colorful durbar of chiefs, traditional drumming, dancing, and a grand procession.",
+   288→   288→  },
+   289→   289→  {
+   290→   290→    id: "ev-agbamevoza",
+   291→   291→    title: "Agbamevoza Kente Festival",
+   292→   292→    date: "October 2026",
+   293→   293→    location: "Agortime-Kpetoe, Volta Region",
+   294→   294→    category: "Cultural",
+   295→   295→    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80",
+   296→   296→    description: "A celebration of the ancient art of Kente weaving at its birthplace. Witness spectacular displays of handwoven textiles, weaving competitions, and cultural performances.",
+   297→   297→  },
+   298→   298→  {
+   299→   299→    id: "ev-afenorto",
+   300→   300→    title: "Keta Afenorto Festival",
+   301→   301→    date: "August 2026",
+   302→   302→    location: "Keta, Volta Region",
+   303→   303→    category: "Cultural",
+   304→   304→    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+   305→   305→    description: "An annual coastal festival celebrating the rich heritage of the Anlo people with regatta, beach activities, traditional music, and seafood feasts along the Atlantic coast.",
+   306→   306→  },
+   307→   307→  {
+   308→   308→    id: "ev-volta-marathon",
+   309→   309→    title: "Volta River Marathon",
+   310→   310→    date: "March 2027",
+   311→   311→    location: "Ho, Volta Region",
+   312→   312→    category: "Adventure",
+   313→   313→    image: "https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=600&q=80",
+   314→   314→    description: "A scenic marathon along the banks of the Volta River, attracting runners from across West Africa. Multiple race categories from 5K fun run to full marathon distance.",
+   315→   315→  },
+   316→   316→  {
+   317→   317→    id: "ev-jazz-fest",
+   318→   318→    title: "Volta Jazz & Arts Festival",
+   319→   319→    date: "December 2026",
+   320→   320→    location: "Sogakope, Volta Region",
+   321→   321→    category: "Music",
+   322→   322→    image: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=600&q=80",
+   323→   323→    description: "A three-day celebration of jazz, African rhythms, and visual arts set against the serene backdrop of the Volta River. Features international and local artists.",
+   324→   324→  },
+   325→   325→  {
+   326→   326→    id: "ev-food-fair",
+   327→   327→    title: "Volta Food & Culture Fair",
+   328→   328→    date: "September 2026",
+   329→   329→    location: "Ho, Volta Region",
+   330→   330→    category: "Food",
+   331→   331→    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80",
+   332→   332→    description: "A gastronomic celebration showcasing the diverse flavors of the Volta Region — from banku and tilapia to akple and crab stew, with cooking demonstrations and food competitions.",
+   333→   333→  },
+   334→   334→];
+   335→   335→
+   336→   336→// ---- STORIES ----
+   337→   337→export const stories: Story[] = [
+   338→   338→  {
+   339→   339→    id: "st-1",
+   340→   340→    title: "The Sacred Monkeys of Tafi Atome: A Conservation Success Story",
+   341→   341→    category: "Wildlife",
+   342→   342→    image: "https://images.unsplash.com/photo-1549366021-9f761d450615?w=600&q=80",
+   343→   343→    excerpt: "How a small community in the Volta Region turned a sacred grove into one of Ghana's most beloved eco-tourism destinations, protecting Mona monkeys for generations.",
+   344→   344→    readingTime: "8 min read",
+   345→   345→    author: "Kofi Mensah",
+   346→   346→    date: "Jul 15, 2026",
+   347→   347→  },
+   348→   348→  {
+   349→   349→    id: "st-2",
+   350→   350→    title: "Chasing Waterfalls: A Complete Guide to Volta Region's Cascading Wonders",
+   351→   351→    category: "Adventure",
+   352→   352→    image: "https://images.unsplash.com/photo-1432405972618-c6b0cfba8b23?w=600&q=80",
+   353→   353→    excerpt: "From the majestic Wli Falls to the hidden gem of Tagbo, discover every waterfall worth visiting in the Volta Region with our comprehensive guide.",
+   354→   354→    readingTime: "12 min read",
+   355→   355→    author: "Ama Dzokoto",
+   356→   356→    date: "Jul 10, 2026",
+   357→   357→  },
+   358→   358→  {
+   359→   359→    id: "st-3",
+   360→   360→    title: "Kente: The Fabric of Kings and the Artisans Who Keep It Alive",
+   361→   361→    category: "Culture",
+   362→   362→    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80",
+   363→   363→    excerpt: "In the villages around Agortime-Kpetoe, master weavers continue a centuries-old tradition, creating the iconic Kente cloth that carries deep cultural symbolism.",
+   364→   364→    readingTime: "10 min read",
+   365→   365→    author: "Selorm Agbeko",
+   366→   366→    date: "Jul 5, 2026",
+   367→   367→  },
+   368→   368→  {
+   369→   369→    id: "st-4",
+   370→   370→    title: "Hidden Beaches of the Volta Coast: Beyond Keta",
+   371→   371→    category: "Coastal",
+   372→   372→    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+   373→   373→    excerpt: "While Keta Beach gets the spotlight, the Volta coastline harbors secret coves, fishing villages, and untouched stretches of sand waiting to be explored.",
+   374→   374→    readingTime: "7 min read",
+   375→   375→    author: "Emefa Adzovor",
+   376→   376→    date: "Jun 28, 2026",
+   377→   377→  },
+   378→   378→  {
+   379→   379→    id: "st-5",
+   380→   380→    title: "The Ewe Culinary Journey: Flavors That Tell Stories",
+   381→   381→    category: "Food",
+   382→   382→    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80",
+   383→   383→    excerpt: "Every dish in the Volta Region tells a story of heritage, community, and the rich agricultural bounty of this extraordinary land. Explore the flavors that define Ewe cuisine.",
+   384→   384→    readingTime: "9 min read",
+   385→   385→    author: "Kofi Mensah",
+   386→   386→    date: "Jun 20, 2026",
+   387→   387→  },
+   388→   388→  {
+   389→   389→    id: "st-6",
+   390→   390→    title: "Festival Season in Volta: A Photographer's Guide",
+   391→   391→    category: "Photography",
+   392→   392→    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80",
+   393→   393→    excerpt: "Capture the vibrant colors, emotions, and energy of Volta Region festivals with expert tips on timing, positioning, and cultural sensitivity.",
+   394→   394→    readingTime: "11 min read",
+   395→   395→    author: "Ama Dzokoto",
+   396→   396→    date: "Jun 15, 2026",
+   397→   397→  },
+   398→   398→];
+   399→   399→
+   400→   400→// ---- INVESTMENTS ----
+   401→   401→export const investments: Investment[] = [
+   402→   402→  {
+   403→   403→    id: "inv-1",
+   404→   404→    title: "Eco-Lodge Development at Wli Falls",
+   405→   405→    sector: "Hospitality",
+   406→   406→    capital: "$250,000 - $500,000",
+   407→   407→    returns: "18-25% ROI",
+   408→   408→    location: "Hohoe Municipality",
+   409→   409→    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80",
+   410→   410→    description: "Develop a 20-room eco-lodge near Wli Waterfalls with sustainable design, restaurant, spa, and guided tour services. High tourist footfall area with growing international demand.",
+   411→   411→  },
+   412→   412→  {
+   413→   413→    id: "inv-2",
+   414→   414→    title: "Lake Volta Cruise & Tourism Hub",
+   415→   415→    sector: "Transport",
+   416→   416→    capital: "$500,000 - $1,000,000",
+   417→   417→    returns: "15-22% ROI",
+   418→   418→    location: "Akpafu & Kpando",
+   419→   419→    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80",
+   420→   420→    description: "Establish a luxury cruise operation on Lake Volta with multiple vessels, waterfront restaurant, and recreational facilities targeting both domestic and international tourists.",
+   421→   421→  },
+   422→   422→  {
+   423→   423→    id: "inv-3",
+   424→   424→    title: "Volta Cultural Village & Craft Center",
+   425→   425→    sector: "Eco Tourism",
+   426→   426→    capital: "$150,000 - $300,000",
+   427→   427→    returns: "12-18% ROI",
+   428→   428→    location: "Ho Municipality",
+   429→   429→    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80",
+   430→   430→    description: "Create a living cultural village showcasing Ewe traditions, Kente weaving, pottery, music, and dance. Includes artisan workshops, performance arena, and retail outlets.",
+   431→   431→  },
+   432→   432→  {
+   433→   433→    id: "inv-4",
+   434→   434→    title: "Digital Tourism Platform & Smart Park System",
+   435→   435→    sector: "Digital Tourism",
+   436→   436→    capital: "$100,000 - $200,000",
+   437→   437→    returns: "20-30% ROI",
+   438→   438→    location: "Region-wide",
+   439→   439→    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80",
+   440→   440→    description: "Build a comprehensive digital tourism infrastructure including smart ticketing, AR-enabled tour guides, visitor analytics, and an integrated booking platform.",
+   441→   441→  },
+   442→   442→];
+   443→   443→
+   444→   444→// ---- COMMUNITIES ----
+   445→   445→export const communities: Community[] = [
+   446→   446→  {
+   447→   447→    id: "com-1",
+   448→   448→    name: "Tafi Atome",
+   449→   449→    image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&q=80",
+   450→   450→    description: "A pioneering eco-tourism community known for its sacred Mona monkey sanctuary and successful community-based conservation model.",
+   451→   451→    culture: "The people of Tafi Atome believe the monkeys are sacred and have protected them for over 200 years. The community has transformed this spiritual connection into a thriving eco-tourism enterprise.",
+   452→   452→    products: ["Handwoven baskets", "Organic honey", "Cocoa products", "Traditional beads"],
+   453→   453→    population: "~3,500",
+   454→   454→  },
+   455→   455→  {
+   456→   456→    id: "com-2",
+   457→   457→    name: "Agortime-Kpetoe",
+   458→   458→    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80",
+   459→   459→    description: "The ancestral home of Ewe Kente weaving, where master artisans continue a centuries-old textile tradition that has become globally iconic.",
+   460→   460→    culture: "Kente weaving in Agortime dates back centuries, with each pattern carrying deep philosophical meanings. The craft is passed through generations, with children learning on miniature looms.",
+   461→   461→    products: ["Kente cloth", "Kente accessories", "Cotton yarn", "Traditional garments"],
+   462→   462→    population: "~8,000",
+   463→   463→  },
+   464→   464→  {
+   465→   465→    id: "com-3",
+   466→   466→    name: "Liati Wote",
+   467→   467→    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80",
+   468→   468→    description: "A gateway village to Mount Afadja and Tagbo Falls, offering homestays and guided treks through some of Ghana's most stunning mountain landscapes.",
+   469→   469→    culture: "Liati Wote sits at the foot of Ghana's highest peak. The community has embraced tourism while maintaining their traditional farming practices and cultural ceremonies.",
+   470→   470→    products: ["Mountain coffee", "Organic vegetables", "Herbal medicine", "Carved walking sticks"],
+   471→   471→    population: "~2,800",
+   472→   472→  },
+   473→   473→];
+   474→   474→
+   475→   475→// ---- BUSINESSES ----
+   476→   476→export const businesses: Business[] = [
+   477→   477→  {
+   478→   478→    id: "biz-1",
+   479→   479→    name: "Wli Falls Heights Lodge",
+   480→   480→    category: "Hotel",
+   481→   481→    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80",
+   482→   482→    location: "Wli, Hohoe",
+   483→   483→    rating: 4.7,
+   484→   484→    verified: true,
+   485→   485→    contact: "+233 24 123 4567",
+   486→   486→  },
+   487→   487→  {
+   488→   488→    id: "biz-2",
+   489→   489→    name: "Volta Serenity Hotel",
+   490→   490→    category: "Hotel",
+   491→   491→    image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80",
+   492→   492→    location: "Ho, Volta Region",
+   493→   493→    rating: 4.6,
+   494→   494→    verified: true,
+   495→   495→    contact: "+233 20 987 6543",
+   496→   496→  },
+   497→   497→  {
+   498→   498→    id: "biz-3",
+   499→   499→    name: "Keta Coastal Resort",
+   500→   500→    category: "Hotel",
+   501→   501→    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80",
+   502→   502→    location: "Keta, Volta Region",
+   503→   503→    rating: 4.5,
+   504→   504→    verified: true,
+   505→   505→    contact: "+233 24 555 1234",
+   506→   506→  },
+   507→   507→  {
+   508→   508→    id: "biz-4",
+   509→   509→    name: "Mama's Kitchen",
+   510→   510→    category: "Restaurant",
+   511→   511→    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80",
+   512→   512→    location: "Ho, Volta Region",
+   513→   513→    rating: 4.8,
+   514→   514→    verified: true,
+   515→   515→    contact: "+233 50 333 7890",
+   516→   516→  },
+   517→   517→  {
+   518→   518→    id: "biz-5",
+   519→   519→    name: "Volta Explorer Tours",
+   520→   520→    category: "Tour Company",
+   521→   521→    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80",
+   522→   522→    location: "Ho, Volta Region",
+   523→   523→    rating: 4.9,
+   524→   524→    verified: true,
+   525→   525→    contact: "+233 20 444 5678",
+   526→   526→  },
+   527→   527→  {
+   528→   528→    id: "biz-6",
+   529→   529→    name: "Kente Heritage Gallery",
+   530→   530→    category: "Shopping",
+   531→   531→    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80",
+   532→   532→    location: "Kpetoe, Volta Region",
+   533→   533→    rating: 4.7,
+   534→   534→    verified: false,
+   535→   535→    contact: "+233 24 666 9012",
+   536→   536→  },
+   537→   537→];
+   538→   538→
+   539→   539→// ---- HERO SLIDES ----
+   540→   540→export const heroSlides = [
+   541→   541→  {
+   542→   542→    image: "https://images.unsplash.com/photo-1432405972618-c6b0cfba8b23?w=1920&q=80",
+   543→   543→    alt: "Wli Waterfalls cascading through lush tropical forest",
+   544→   544→  },
+   545→   545→  {
+   546→   546→    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=80",
+   547→   547→    alt: "Mount Afadja towering above the clouds",
+   548→   548→  },
+   549→   549→  {
+   550→   550→    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80",
+   551→   551→    alt: "Pristine golden sand beach at sunset",
+   552→   552→  },
+   553→   553→  {
+   554→   554→    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80",
+   555→   555→    alt: "Lush tropical forest canopy",
+   556→   556→  },
+   557→   557→  {
+   558→   558→    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1920&q=80",
+   559→   559→    alt: "Traditional cultural festival celebration",
+   560→   560→  },
+   561→   561→  {
+   562→   562→    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&q=80",
+   563→   563→    alt: "Local cuisine and culinary delights",
+   564→   564→  },
+   565→   565→];
+   566→   566→
+   567→   567→// ---- STATS ----
+   568→   568→export const stats = [
+   569→   569→  { value: "50+", label: "Tourist Destinations" },
+   570→   570→  { value: "25K+", label: "Annual Visitors" },
+   571→   571→  { value: "200+", label: "Tourism Businesses" },
+   572→   572→  { value: "15+", label: "Cultural Festivals" },
+   573→   573→  { value: "8", label: "Municipalities" },
+   574→   574→  { value: "100+", label: "Community Projects" },
+   575→   575→];
+   576→   576→
+   577→   577→// ---- SEARCH CATEGORIES ----
+   578→   578→export const searchCategories = [
+   579→   579→  "Destination",
+   580→   580→  "Hotel",
+   581→   581→  "Restaurant",
+   582→   582→  "Festival",
+   583→   583→  "Adventure",
+   584→   584→  "Waterfall",
+   585→   585→  "Beach",
+   586→   586→  "Community",
+   587→   587→  "Wildlife",
+   588→   588→  "Transport",
+   589→   589→  "Guide",
+   590→   590→  "Investment",
+   591→   591→];
+   592→   592→
+   593→   593→// ---- TRAVEL STYLES ----
+   594→   594→export const travelStyles = [
+   595→   595→  { id: "family", label: "Family", icon: "Users", description: "Kid-friendly activities and family bonding" },
+   596→   596→  { id: "adventure", label: "Adventure", icon: "Compass", description: "Thrilling outdoor experiences" },
+   597→   597→  { id: "luxury", label: "Luxury", icon: "Crown", description: "Premium comfort and exclusivity" },
+   598→   598→  { id: "photography", label: "Photography", icon: "Camera", description: "Stunning landscapes and culture" },
+   599→   599→  { id: "culture", label: "Culture", icon: "Landmark", description: "Heritage, festivals, and traditions" },
+   600→   600→  { id: "nature", label: "Nature", icon: "Trees", description: "Forests, waterfalls, and wildlife" },
+   601→   601→];
+   602→   602→
+   603→   603→// ---- TRIP PLAN GENERATOR ----
+   604→   604→export function generateTripPlan(days: number, budget: string, interests: string[], style: string): TripPlan {
+   605→   605→  const destinationPool = destinations.filter(
+   606→   606→    (d) => interests.length === 0 || interests.some((i) => d.category.toLowerCase().includes(i.toLowerCase()))
+   607→   607→  );
+   608→   608→
+   609→   609→  const dayPlans: DayPlan[] = [];
+   610→   610→  const usedDestinations = new Set<string>();
+   611→   611→
+   612→   612→  for (let i = 0; i < days; i++) {
+   613→   613→    const dayNum = i + 1;
+   614→   614→    const availableDest = destinationPool.filter((d) => !usedDestinations.has(d.id));
+   615→   615→    const dest = availableDest.length > 0
+   616→   616→      ? availableDest[i % availableDest.length]
+   617→   617→      : destinationPool[i % destinationPool.length];
+   618→   618→
+   619→   619→    if (dest) usedDestinations.add(dest.id);
+   620→   620→
+   621→   621→    const costLevel = budget === "luxury" ? "$$$$" : budget === "moderate" ? "$$" : "$";
+   622→   622→    const mealCost = budget === "luxury" ? "$$$" : budget === "moderate" ? "$$" : "$";
+   623→   623→
+   624→   624→    dayPlans.push({
+   625→   625→      day: dayNum,
+   626→   626→      title: dayNum === 1 ? "Arrival & First Impressions" : dayNum === days ? "Farewell & Departure" : `Exploring Day ${dayNum}`,
+   627→   627→      activities: [
+   628→   628→        {
+   629→   629→          time: "7:00 AM",
+   630→   630→          activity: "Breakfast at local restaurant",
+   631→   631→          location: dest ? `${dest.municipality}` : "Ho",
+   632→   632→          cost: mealCost,
+   633→   633→        },
+   634→   634→        {
+   635→   635→          time: "9:00 AM",
+   636→   636→          activity: `Visit ${dest ? dest.name : "Volta Lake"} and explore`,
+   637→   637→          location: dest ? dest.name : "Lake Volta",
+   638→   638→          cost: costLevel,
+   639→   639→        },
+   640→   640→        {
+   641→   641→          time: "1:00 PM",
+   642→   642→          activity: "Lunch with local cuisine",
+   643→   643→          location: dest ? dest.municipality : "Ho",
+   644→   644→          cost: mealCost,
+   645→   645→        },
+   646→   646→        {
+   647→   647→          time: "3:00 PM",
+   648→   648→          activity: dayNum <= 2
+   649→   649→            ? "Guided community tour & cultural immersion"
+   650→   650→            : dayNum === days
+   651→   651→              ? "Souvenir shopping & departure preparations"
+   652→   652→              : `Adventure activity near ${dest ? dest.name : "the site"}`,
+   653→   653→          location: dest ? dest.municipality : "Volta Region",
+   654→   654→          cost: costLevel,
+   655→   655→        },
+   656→   656→        {
+   657→   657→          time: "7:00 PM",
+   658→   658→          activity: "Dinner & evening relaxation",
+   659→   659→          location: dest ? dest.municipality : "Ho",
+   660→   660→          cost: mealCost,
+   661→   661→        },
+   662→   662→      ],
+   663→   663→    });
+   664→   664→  }
+   665→   665→
+   666→   666→  return { days, budget, interests, style, itinerary: dayPlans };
+   667→   667→}
+   668→   668→
+   669→   669→// ---- MAP CATEGORIES ----
+   670→   670→export const mapCategories = [
+   671→   671→  { id: "hotels", label: "Hotels", icon: "Hotel" },
+   672→   672→  { id: "restaurants", label: "Restaurants", icon: "UtensilsCrossed" },
+   673→   673→  { id: "sites", label: "Tourist Sites", icon: "MapPin" },
+   674→   674→  { id: "hospitals", label: "Hospitals", icon: "Plus" },
+   675→   675→  { id: "fuel", label: "Fuel Stations", icon: "Fuel" },
+   676→   676→  { id: "events", label: "Events", icon: "Calendar" },
+   677→   677→  { id: "operators", label: "Tour Operators", icon: "Compass" },
+   678→   678→  { id: "transport", label: "Transport", icon: "Bus" },
+   679→   679→];
