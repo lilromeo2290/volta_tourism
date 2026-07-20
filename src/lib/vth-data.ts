@@ -101,7 +101,7 @@ export const destinations: Destination[] = [
     rating: 4.8,
     distance: "280 km from Accra",
     travelTime: "4 hours drive",
-    image: "https://images.unsplash.com/photo-1432405972618-c6b0cfba8b23?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800&q=80",
     description:
       "The highest waterfall in West Africa, Wli cascades magnificently through lush tropical forest. The lower falls welcome all visitors with a gentle walk, while the upper falls reward the adventurous with a challenging but breathtaking trek through the Agumatsa Wildlife Sanctuary.",
     highlights: ["Highest waterfall in West Africa", "Swimming at the base", "Bat colony viewing", "Forest hiking trails"],
@@ -192,7 +192,7 @@ export const destinations: Destination[] = [
     rating: 4.8,
     distance: "170 km from Accra",
     travelTime: "2.5 hours drive",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
     description:
       "Visit the ancestral home of Kente cloth, the iconic hand-woven fabric of the Ewe and Ashanti people. Watch master weavers create intricate patterns on traditional looms, learn the meanings behind each design, and purchase authentic textiles directly from artisans.",
     highlights: ["Traditional hand-weaving", "Master artisan demonstrations", "Authentic textile purchase", "Cultural significance"],
@@ -270,7 +270,7 @@ export const experiences: Experience[] = [
     title: "Community Tourism",
     category: "Community",
     icon: "Users",
-    image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
     description: "Live among local communities, learn traditional crafts, participate in daily life, and create meaningful connections with the people of Volta.",
   },
 ];
@@ -292,7 +292,7 @@ export const events: Event[] = [
     date: "October 2026",
     location: "Agortime-Kpetoe, Volta Region",
     category: "Cultural",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
     description: "A celebration of the ancient art of Kente weaving at its birthplace. Witness spectacular displays of handwoven textiles, weaving competitions, and cultural performances.",
   },
   {
@@ -349,7 +349,7 @@ export const stories: Story[] = [
     id: "st-2",
     title: "Chasing Waterfalls: A Complete Guide to Volta Region's Cascading Wonders",
     category: "Adventure",
-    image: "https://images.unsplash.com/photo-1432405972618-c6b0cfba8b23?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=600&q=80",
     excerpt: "From the majestic Wli Falls to the hidden gem of Tagbo, discover every waterfall worth visiting in the Volta Region with our comprehensive guide.",
     readingTime: "12 min read",
     author: "Ama Dzokoto",
@@ -359,7 +359,7 @@ export const stories: Story[] = [
     id: "st-3",
     title: "Kente: The Fabric of Kings and the Artisans Who Keep It Alive",
     category: "Culture",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
     excerpt: "In the villages around Agortime-Kpetoe, master weavers continue a centuries-old tradition, creating the iconic Kente cloth that carries deep cultural symbolism.",
     readingTime: "10 min read",
     author: "Selorm Agbeko",
@@ -426,7 +426,7 @@ export const investments: Investment[] = [
     capital: "$150,000 - $300,000",
     returns: "12-18% ROI",
     location: "Ho Municipality",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
     description: "Create a living cultural village showcasing Ewe traditions, Kente weaving, pottery, music, and dance. Includes artisan workshops, performance arena, and retail outlets.",
   },
   {
@@ -446,7 +446,7 @@ export const communities: Community[] = [
   {
     id: "com-1",
     name: "Tafi Atome",
-    image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
     description: "A pioneering eco-tourism community known for its sacred Mona monkey sanctuary and successful community-based conservation model.",
     culture: "The people of Tafi Atome believe the monkeys are sacred and have protected them for over 200 years. The community has transformed this spiritual connection into a thriving eco-tourism enterprise.",
     products: ["Handwoven baskets", "Organic honey", "Cocoa products", "Traditional beads"],
@@ -455,7 +455,7 @@ export const communities: Community[] = [
   {
     id: "com-2",
     name: "Agortime-Kpetoe",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
     description: "The ancestral home of Ewe Kente weaving, where master artisans continue a centuries-old textile tradition that has become globally iconic.",
     culture: "Kente weaving in Agortime dates back centuries, with each pattern carrying deep philosophical meanings. The craft is passed through generations, with children learning on miniature looms.",
     products: ["Kente cloth", "Kente accessories", "Cotton yarn", "Traditional garments"],
@@ -539,7 +539,7 @@ export const businesses: Business[] = [
 // ---- HERO SLIDES ----
 export const heroSlides = [
   {
-    image: "https://images.unsplash.com/photo-1432405972618-c6b0cfba8b23?w=1920&q=80",
+    image: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=1920&q=80",
     alt: "Wli Waterfalls cascading through lush tropical forest",
   },
   {
