@@ -171,6 +171,13 @@ export default function ContactSection() {
                 <p>
                   <span className="font-semibold text-white">Tourism Hotline:</span>{" "}
                   <a
+                    href="tel:+233202892223"
+                    className="text-[#F59E0B] hover:text-[#FBBF24] transition-colors"
+                  >
+                    +233 202 892 223
+                  </a>
+                  {" / "}
+                  <a
                     href="tel:+233244183058"
                     className="text-[#F59E0B] hover:text-[#FBBF24] transition-colors"
                   >
