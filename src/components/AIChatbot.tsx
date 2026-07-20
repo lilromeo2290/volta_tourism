@@ -93,7 +93,6 @@ export default function AIChatbot() {
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate response delay
     setTimeout(() => {
       const response = getBotResponse(text);
       const botMsg: Message = {
@@ -118,7 +117,6 @@ export default function AIChatbot() {
 
   return (
     <div className="fixed bottom-24 right-6 z-40 flex flex-col items-end gap-3">
-      {/* Expanded Chat Panel */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -126,13 +124,13 @@ export default function AIChatbot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 20 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="w-96 max-w-[calc(100vw-2rem)] rounded-2xl bg-white shadow-2xl shadow-forest/10 overflow-hidden border border-border/50 flex flex-col"
+            className="w-96 max-w-[calc(100vw-2rem)] rounded-2xl bg-white shadow-2xl shadow-[#054906]/10 overflow-hidden border border-border/50 flex flex-col"
           >
             {/* Header */}
-            <div className="bg-forest px-5 py-4 flex items-center justify-between shrink-0">
+            <div className="bg-[#054906] px-5 py-4 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-warm-gold/20 flex items-center justify-center">
-                  <MapPin className="w-4.5 h-4.5 text-warm-gold" />
+                <div className="w-9 h-9 rounded-full bg-[#F59E0B]/20 flex items-center justify-center">
+                  <MapPin className="w-4.5 h-4.5 text-[#F59E0B]" />
                 </div>
                 <div>
                   <h3 className="text-white font-heading font-semibold text-sm leading-tight">
@@ -154,7 +152,7 @@ export default function AIChatbot() {
             </div>
 
             {/* Messages Area */}
-            <div className="h-80 overflow-y-auto px-4 py-4 space-y-4 bg-cream/50 no-scrollbar">
+            <div className="h-80 overflow-y-auto px-4 py-4 space-y-4 bg-[#F8F9FA]/50 no-scrollbar">
               {messages.map((msg) => (
                 <motion.div
                   key={msg.id}
@@ -168,14 +166,14 @@ export default function AIChatbot() {
                   <div
                     className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-line ${
                       msg.sender === "user"
-                        ? "bg-warm-gold/10 text-charcoal rounded-br-md"
-                        : "bg-forest/10 text-charcoal rounded-bl-md"
+                        ? "bg-[#F59E0B]/10 text-charcoal rounded-br-md"
+                        : "bg-[#054906]/10 text-charcoal rounded-bl-md"
                     }`}
                   >
                     {msg.text.split(/(\*\*.*?\*\*)/).map((part, i) => {
                       if (part.startsWith("**") && part.endsWith("**")) {
                         return (
-                          <strong key={i} className="font-semibold text-forest">
+                          <strong key={i} className="font-semibold text-[#054906]">
                             {part.slice(2, -2)}
                           </strong>
                         );
@@ -186,17 +184,16 @@ export default function AIChatbot() {
                 </motion.div>
               ))}
 
-              {/* Typing indicator */}
               {isTyping && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-forest/10 rounded-2xl rounded-bl-md px-4 py-3 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-forest/40 animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <span className="w-2 h-2 rounded-full bg-forest/40 animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <span className="w-2 h-2 rounded-full bg-forest/40 animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <div className="bg-[#054906]/10 rounded-2xl rounded-bl-md px-4 py-3 flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#054906]/40 animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <span className="w-2 h-2 rounded-full bg-[#054906]/40 animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <span className="w-2 h-2 rounded-full bg-[#054906]/40 animate-bounce" style={{ animationDelay: "300ms" }} />
                   </div>
                 </motion.div>
               )}
@@ -211,7 +208,7 @@ export default function AIChatbot() {
                   <button
                     key={action}
                     onClick={() => handleQuickAction(action)}
-                    className="text-xs px-3 py-1.5 rounded-full border border-forest/20 text-forest hover:bg-forest hover:text-white transition-colors duration-200 cursor-pointer"
+                    className="text-xs px-3 py-1.5 rounded-full border border-[#054906]/20 text-[#054906] hover:bg-[#054906] hover:text-white transition-colors duration-200 cursor-pointer"
                   >
                     {action}
                   </button>
@@ -229,14 +226,14 @@ export default function AIChatbot() {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Ask about Volta Region..."
-                className="flex-1 h-10 rounded-full border-border/80 bg-cream/50 text-sm focus-visible:ring-forest/30 focus-visible:border-forest/50"
+                className="flex-1 h-10 rounded-full border-border/80 bg-[#F8F9FA]/50 text-sm focus-visible:ring-[#054906]/30 focus-visible:border-[#054906]/50"
                 disabled={isTyping}
               />
               <Button
                 type="submit"
                 size="icon"
                 disabled={!inputValue.trim() || isTyping}
-                className="w-10 h-10 rounded-full bg-forest hover:bg-forest-light shrink-0 disabled:opacity-40"
+                className="w-10 h-10 rounded-full bg-[#054906] hover:bg-[#054906]/80 shrink-0 disabled:opacity-40"
                 aria-label="Send message"
               >
                 <Send className="w-4 h-4 text-white" />
@@ -249,7 +246,7 @@ export default function AIChatbot() {
       {/* Floating Toggle Button */}
       <motion.button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-14 h-14 rounded-full bg-forest hover:bg-forest-light shadow-lg shadow-forest/30 flex items-center justify-center transition-colors duration-200 cursor-pointer"
+        className="w-14 h-14 rounded-full bg-[#054906] hover:bg-[#054906]/80 shadow-lg shadow-[#054906]/30 flex items-center justify-center transition-colors duration-200 cursor-pointer"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Open travel assistant"
@@ -275,8 +272,7 @@ export default function AIChatbot() {
               className="relative"
             >
               <MessageCircle className="w-6 h-6 text-white" />
-              {/* Pulse ring */}
-              <span className="absolute inset-0 rounded-full bg-forest animate-ping opacity-20" />
+              <span className="absolute inset-0 rounded-full bg-[#054906] animate-ping opacity-20" />
             </motion.div>
           )}
         </AnimatePresence>

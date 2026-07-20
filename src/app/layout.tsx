@@ -82,7 +82,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#14532D" />
+        <meta name="theme-color" content="#054906" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
@@ -106,7 +106,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased bg-cream text-charcoal min-h-screen">
+      <body className="antialiased bg-white text-charcoal min-h-screen">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

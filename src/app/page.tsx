@@ -5,12 +5,14 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import ExperiencesSection from "@/components/ExperiencesSection";
 import DestinationsSection from "@/components/DestinationsSection";
-import TripPlannerSection from "@/components/TripPlannerSection";
-import StatsSection from "@/components/StatsSection";
-import MapSection from "@/components/MapSection";
+import PlanJourneySection from "@/components/PlanJourneySection";
+import FeaturedDestinationSection from "@/components/FeaturedDestinationSection";
 import EventsSection from "@/components/EventsSection";
 import StoriesSection from "@/components/StoriesSection";
-import InvestmentSection from "@/components/InvestmentSection";
+import InvestSection from "@/components/InvestSection";
+import StatsSection from "@/components/StatsSection";
+import MapSection from "@/components/MapSection";
+import TripPlannerSection from "@/components/TripPlannerSection";
 import CommunitySection from "@/components/CommunitySection";
 import BusinessDirectorySection from "@/components/BusinessDirectorySection";
 import MediaCenterSection from "@/components/MediaCenterSection";
@@ -20,19 +22,21 @@ const AIChatbot = dynamic(() => import("@/components/AIChatbot"), { ssr: false }
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-cream">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navigation />
       <main className="flex-1">
         <HeroSection />
         <ExperiencesSection />
+        <PlanJourneySection />
+        <FeaturedDestinationSection />
+        <EventsSection />
         <StatsSection />
+        <StoriesSection />
+        <InvestSection />
         <DestinationsSection />
         <TripPlannerSection />
         <MapSection />
-        <EventsSection />
-        <StoriesSection />
         <MediaCenterSection />
-        <InvestmentSection />
         <CommunitySection />
         <BusinessDirectorySection />
       </main>

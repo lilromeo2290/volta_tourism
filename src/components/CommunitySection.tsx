@@ -38,13 +38,13 @@ export default function CommunitySection() {
   return (
     <section
       id="community"
-      className="py-24 md:py-32 bg-cream"
+      className="py-24 md:py-32 bg-[#F8F9FA]"
       ref={sectionRef}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 reveal">
-          <span className="text-warm-gold font-semibold tracking-widest text-sm uppercase">
+          <span className="text-[#F59E0B] font-semibold tracking-widest text-sm uppercase">
             COMMUNITY TOURISM
           </span>
           <h2 className="text-3xl md:text-5xl font-heading font-bold text-charcoal mt-3">
@@ -64,7 +64,7 @@ export default function CommunitySection() {
             <motion.div
               key={community.id}
               className="reveal rounded-2xl overflow-hidden bg-white shadow-sm group"
-              whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(20, 83, 45, 0.18)" }}
+              whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(5, 73, 6, 0.18)" }}
               transition={{
                 type: "spring",
                 stiffness: 300,
@@ -85,19 +85,17 @@ export default function CommunitySection() {
 
                 {/* Population Badge */}
                 <div className="absolute bottom-4 left-4 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-charcoal text-xs font-semibold px-3 py-1.5 rounded-full">
-                  <Users className="w-3.5 h-3.5 text-forest" />
+                  <Users className="w-3.5 h-3.5 text-[#054906]" />
                   {community.population} residents
                 </div>
               </div>
 
               {/* Content Area */}
               <div className="p-6 rounded-b-2xl">
-                {/* Community Name */}
                 <h3 className="font-heading font-bold text-xl text-charcoal">
                   {community.name}
                 </h3>
 
-                {/* Description */}
                 <p className="text-sm text-muted-foreground line-clamp-3 mt-2 leading-relaxed">
                   {community.description}
                 </p>
@@ -105,7 +103,7 @@ export default function CommunitySection() {
                 {/* Culture Section */}
                 <div className="mt-4 pt-4 border-t border-border">
                   <div className="flex items-center gap-1.5 mb-2">
-                    <Palette className="w-4 h-4 text-warm-gold" />
+                    <Palette className="w-4 h-4 text-[#F59E0B]" />
                     <span className="text-xs font-semibold uppercase tracking-wide text-charcoal/60">
                       Culture & Heritage
                     </span>
@@ -120,16 +118,16 @@ export default function CommunitySection() {
                   {community.products.map((product) => (
                     <span
                       key={product}
-                      className="inline-flex items-center gap-1 bg-cream text-charcoal/70 text-xs font-medium px-2.5 py-1 rounded-full"
+                      className="inline-flex items-center gap-1 bg-[#F8F9FA] text-charcoal/70 text-xs font-medium px-2.5 py-1 rounded-full"
                     >
-                      <Sparkles className="w-3 h-3 text-warm-gold" />
+                      <Sparkles className="w-3 h-3 text-[#F59E0B]" />
                       {product}
                     </span>
                   ))}
                 </div>
 
                 {/* CTA Button */}
-                <Button className="mt-5 w-full bg-forest hover:bg-forest-light text-white font-semibold transition-colors">
+                <Button className="mt-5 w-full bg-[#054906] hover:bg-[#054906]/80 text-white font-semibold transition-colors">
                   Visit Community
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
@@ -142,7 +140,7 @@ export default function CommunitySection() {
         <div className="text-center mt-14 reveal">
           <Button
             variant="outline"
-            className="border-forest/30 text-forest hover:bg-forest hover:text-white font-semibold px-8 py-6 text-base transition-all"
+            className="border-[#054906]/30 text-[#054906] hover:bg-[#054906] hover:text-white font-semibold px-8 py-6 text-base transition-all"
           >
             Explore All Communities
             <ArrowRight className="w-4 h-4 ml-2" />

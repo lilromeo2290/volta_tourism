@@ -2,19 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  Map,
-  Phone,
-  Mail,
-  Facebook,
-  Twitter,
-  Instagram,
-  Youtube,
-  Send,
-  ArrowUp,
-  ExternalLink,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Facebook, Instagram, Youtube, Send, ArrowUp } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 const exploreLinks = [
@@ -23,30 +11,57 @@ const exploreLinks = [
   { label: "Plan Trip", href: "#plan" },
   { label: "Events", href: "#events" },
   { label: "Stories", href: "#stories" },
-  { label: "Map", href: "#map" },
 ];
 
-const resourceLinks = [
-  { label: "Business Directory", href: "#directory" },
-  { label: "Investment", href: "#investment" },
-  { label: "Community Tourism", href: "#community" },
-  { label: "Media Centre", href: "#media" },
-  { label: "Membership", href: "#membership" },
+const businessLinks = [
+  { label: "Directory", href: "#directory" },
+  { label: "Invest", href: "#investment" },
+  { label: "Community", href: "#community" },
+  { label: "About VTH", href: "#about" },
   { label: "Contact", href: "#contact" },
-];
-
-const bottomLinks = [
-  { label: "Privacy Policy", href: "#privacy" },
-  { label: "Terms of Service", href: "#terms" },
-  { label: "Cookie Policy", href: "#cookies" },
 ];
 
 const socialIcons = [
   { icon: Facebook, label: "Facebook", href: "#" },
-  { icon: Twitter, label: "Twitter / X", href: "#" },
   { icon: Instagram, label: "Instagram", href: "#" },
   { icon: Youtube, label: "YouTube", href: "#" },
+  { icon: XIcon, label: "X / Twitter", href: "#" },
+  { icon: TikTokIcon, label: "TikTok", href: "#" },
 ];
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+    </svg>
+  );
+}
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+    </svg>
+  );
+}
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -66,12 +81,12 @@ export default function Footer() {
   };
 
   return (
-    <footer id="footer" className="bg-forest-dark text-white">
+    <footer id="footer" className="bg-[#042F2E] text-white">
       {/* Back to Top */}
       <div className="flex justify-center -mt-6 relative z-10">
         <motion.button
           onClick={scrollToTop}
-          className="w-12 h-12 rounded-full bg-warm-gold hover:bg-warm-gold-light text-forest-dark flex items-center justify-center shadow-lg shadow-warm-gold/20 transition-colors cursor-pointer"
+          className="w-12 h-12 rounded-full bg-[#F59E0B] hover:bg-[#F59E0B]/80 text-[#042F2E] flex items-center justify-center shadow-lg transition-colors cursor-pointer"
           whileHover={{ y: -3 }}
           whileTap={{ scale: 0.9 }}
           aria-label="Back to top"
@@ -85,21 +100,65 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
             {/* Column 1 - Brand */}
-            <div className="sm:col-span-2 lg:col-span-1">
+            <div>
               <div className="flex items-center gap-2.5 mb-4">
                 <img
                   src="/vth-logo.jpg"
                   alt="Volta Tourism Hub"
-                  className="h-20 w-auto object-contain rounded-lg brightness-0 invert"
+                  className="h-16 w-auto object-contain rounded-lg brightness-0 invert"
                 />
               </div>
-
-              <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-xs">
-                The definitive digital gateway to Ghana&apos;s Volta Region.
-                Discover, plan, and experience the beauty of Volta.
+              <p className="text-lg font-semibold text-[#F59E0B]">
+                Volta Tourism Hub
               </p>
+              <p className="text-sm text-white/60 leading-relaxed mt-1">
+                Your gateway to Ghana&apos;s Volta Region. Discover, plan, and experience.
+              </p>
+            </div>
 
-              {/* Social Icons */}
+            {/* Column 2 - Explore */}
+            <div>
+              <h4 className="font-semibold text-sm uppercase tracking-wider text-[#F59E0B] mb-5">
+                EXPLORE
+              </h4>
+              <ul className="space-y-3">
+                {exploreLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-white/60 hover:text-white transition-colors duration-200"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 3 - Business */}
+            <div>
+              <h4 className="font-semibold text-sm uppercase tracking-wider text-[#F59E0B] mb-5">
+                BUSINESS
+              </h4>
+              <ul className="space-y-3">
+                {businessLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-white/60 hover:text-white transition-colors duration-200"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 4 - Follow Us */}
+            <div>
+              <h4 className="font-semibold text-sm uppercase tracking-wider text-[#F59E0B] mb-5">
+                FOLLOW US
+              </h4>
               <div className="flex items-center gap-3">
                 {socialIcons.map((social) => {
                   const IconComp = social.icon;
@@ -108,104 +167,12 @@ export default function Footer() {
                       key={social.label}
                       href={social.href}
                       aria-label={social.label}
-                      className="w-9 h-9 rounded-full bg-white/10 hover:bg-warm-gold/20 flex items-center justify-center transition-colors duration-200 group"
+                      className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#F59E0B]/20 flex items-center justify-center transition-colors duration-200 group"
                     >
-                      <IconComp className="w-4 h-4 text-white/60 group-hover:text-warm-gold transition-colors duration-200" />
+                      <IconComp className="w-4 h-4 text-white/60 group-hover:text-[#F59E0B] transition-colors duration-200" />
                     </a>
                   );
                 })}
-              </div>
-            </div>
-
-            {/* Column 2 - Explore */}
-            <div>
-              <h4 className="font-heading font-semibold text-sm uppercase tracking-wider text-warm-gold mb-5">
-                Explore
-              </h4>
-              <ul className="space-y-3">
-                {exploreLinks.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-white/60 hover:text-white transition-colors duration-200 inline-flex items-center gap-1.5 group"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-warm-gold/40 group-hover:bg-warm-gold transition-colors duration-200" />
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 3 - Resources */}
-            <div>
-              <h4 className="font-heading font-semibold text-sm uppercase tracking-wider text-warm-gold mb-5">
-                Resources
-              </h4>
-              <ul className="space-y-3">
-                {resourceLinks.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-white/60 hover:text-white transition-colors duration-200 inline-flex items-center gap-1.5 group"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-warm-gold/40 group-hover:bg-warm-gold transition-colors duration-200" />
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 4 - Contact & Emergency */}
-            <div>
-              <h4 className="font-heading font-semibold text-sm uppercase tracking-wider text-warm-gold mb-5">
-                Contact
-              </h4>
-              <ul className="space-y-4">
-                <li className="flex gap-3">
-                  <Map className="w-4 h-4 text-white/40 mt-0.5 shrink-0" />
-                  <span className="text-sm text-white/60 leading-relaxed">
-                    Volta Regional Coordinating Council, Ho, Ghana
-                  </span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-white/40 shrink-0" />
-                  <a
-                    href="tel:+233XXXXXXXXX"
-                    className="text-sm text-white/60 hover:text-white transition-colors"
-                  >
-                    +233 XXX XXX XXX
-                  </a>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-white/40 shrink-0" />
-                  <a
-                    href="mailto:info@voltatourismhub.com"
-                    className="text-sm text-white/60 hover:text-white transition-colors break-all"
-                  >
-                    info@voltatourismhub.com
-                  </a>
-                </li>
-              </ul>
-
-              {/* Emergency */}
-              <div className="mt-6 pt-5 border-t border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                  <Phone className="w-3.5 h-3.5 text-warm-gold" />
-                  <span className="text-xs font-semibold uppercase tracking-wider text-warm-gold">
-                    Emergency
-                  </span>
-                </div>
-                <a
-                  href="tel:+233XXXXXXXXX"
-                  className="text-sm font-semibold text-warm-gold hover:text-warm-gold-light transition-colors"
-                >
-                  +233 XXX XXX XXX
-                </a>
-                <p className="text-xs text-white/40 mt-1">
-                  24/7 Tourist Assistance Line
-                </p>
               </div>
             </div>
           </div>
@@ -213,46 +180,38 @@ export default function Footer() {
       </div>
 
       {/* Newsletter Section */}
-      <div className="bg-forest py-8">
+      <div className="border-t border-white/10 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
-              <h4 className="font-heading font-semibold text-lg text-white">
-                Subscribe to Our Newsletter
+              <h4 className="font-semibold text-lg text-white">
+                Stay Inspired. Stay Connected.
               </h4>
-              <p className="text-sm text-white/50 mt-1">
-                Get the latest Volta Region travel updates and exclusive offers.
-              </p>
             </div>
 
             <form
               onSubmit={handleSubscribe}
               className="flex w-full max-w-md gap-2"
             >
-              <div className="relative flex-1">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-                <Input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="h-11 pl-10 rounded-xl bg-white/10 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-warm-gold/30 focus-visible:border-warm-gold/50 text-sm"
-                  required
-                />
-              </div>
-              <Button
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="h-11 rounded-full bg-white/10 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-[#F59E0B]/30 focus-visible:border-[#F59E0B]/50 text-sm"
+                required
+              />
+              <button
                 type="submit"
-                className="h-11 px-6 rounded-xl bg-warm-gold hover:bg-warm-gold-light text-forest-dark font-semibold shrink-0"
+                className="h-11 px-6 rounded-full bg-[#F59E0B] hover:bg-[#F59E0B]/80 text-[#042F2E] font-semibold text-sm shrink-0 transition-colors cursor-pointer"
               >
-                {subscribed ? (
-                  <span className="text-sm">Subscribed!</span>
-                ) : (
+                {subscribed ? "Done!" : (
                   <>
-                    <Send className="w-4 h-4 mr-2" />
-                    <span className="text-sm">Subscribe</span>
+                    <Send className="w-4 h-4 mr-2 inline" />
+                    Subscribe
                   </>
                 )}
-              </Button>
+              </button>
             </form>
           </div>
         </div>
@@ -262,32 +221,28 @@ export default function Footer() {
       <div className="py-6 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-            {/* Left - Copyright */}
             <p className="text-xs text-white/40">
               © 2026 Volta Tourism Hub. All rights reserved.
             </p>
 
-            {/* Center - Love */}
-            <p className="text-xs text-white/30 hidden lg:block">
-              Built with{" "}
-              <span className="text-warm-gold" aria-label="love">
-                ♥
-              </span>{" "}
-              for the Volta Region
-            </p>
-
-            {/* Right - Links */}
             <div className="flex items-center gap-4">
-              {bottomLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-xs text-white/40 hover:text-white/70 transition-colors duration-200"
-                >
-                  {link.label}
-                </a>
-              ))}
+              <a
+                href="#privacy"
+                className="text-xs text-white/40 hover:text-white/70 transition-colors"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="#terms"
+                className="text-xs text-white/40 hover:text-white/70 transition-colors"
+              >
+                Terms
+              </a>
             </div>
+
+            <p className="text-xs text-white/30 hidden lg:block">
+              Made with <span className="text-[#F59E0B]">❤️</span> for Volta
+            </p>
           </div>
         </div>
       </div>

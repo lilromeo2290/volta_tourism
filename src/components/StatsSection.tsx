@@ -13,7 +13,7 @@ function AnimatedCounter({ value, label }: { value: string; label: string }) {
 
   return (
     <div ref={ref} className="text-center group">
-      <div className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-warm-gold mb-2 transition-transform duration-300 group-hover:scale-110">
+      <div className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-[#F59E0B] mb-2 transition-transform duration-300 group-hover:scale-110">
         {isInView ? (
           <motion.span
             initial={{ opacity: 0, y: 20 }}
@@ -27,7 +27,7 @@ function AnimatedCounter({ value, label }: { value: string; label: string }) {
             )}
           </motion.span>
         ) : (
-          <span className="text-warm-gold/30">0</span>
+          <span className="text-[#F59E0B]/30">0</span>
         )}
       </div>
       <div className="text-sm md:text-base text-white/70 font-medium tracking-wide">
@@ -72,12 +72,12 @@ export default function StatsSection() {
   return (
     <section
       ref={ref}
-      className="relative py-20 md:py-28 bg-forest-dark overflow-hidden"
+      className="relative py-20 md:py-28 bg-[#042F2E] overflow-hidden"
     >
       {/* Decorative elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-warm-gold rounded-full blur-[128px]" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-volta-blue rounded-full blur-[128px]" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#F59E0B] rounded-full blur-[128px]" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#F59E0B] rounded-full blur-[128px]" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,7 +87,7 @@ export default function StatsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <span className="text-warm-gold font-semibold tracking-widest text-sm uppercase">
+          <span className="text-[#F59E0B] font-semibold tracking-widest text-sm uppercase">
             VOLTA REGION AT A GLANCE
           </span>
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mt-3">

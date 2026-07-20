@@ -125,11 +125,11 @@ export default function MediaCenterSection() {
   }, []);
 
   return (
-    <section id="media" className="py-24 md:py-32 bg-cream" ref={sectionRef}>
+    <section id="media" className="py-24 md:py-32 bg-[#F8F9FA]" ref={sectionRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 reveal">
-          <span className="text-warm-gold font-semibold tracking-widest text-sm uppercase">
+          <span className="text-[#F59E0B] font-semibold tracking-widest text-sm uppercase">
             MEDIA CENTRE
           </span>
           <h2 className="text-3xl md:text-5xl font-heading font-bold text-charcoal mt-3">
@@ -145,7 +145,7 @@ export default function MediaCenterSection() {
         {/* Photo Gallery Grid - Masonry-like */}
         <div className="mb-20 reveal">
           <div className="flex items-center gap-3 mb-8">
-            <ImageIcon className="w-5 h-5 text-forest" />
+            <ImageIcon className="w-5 h-5 text-[#054906]" />
             <h3 className="text-xl font-heading font-semibold text-charcoal">
               Photo Gallery
             </h3>
@@ -172,9 +172,8 @@ export default function MediaCenterSection() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                     loading="lazy"
                   />
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-5">
-                    <span className="text-warm-gold text-xs font-semibold uppercase tracking-wider mb-1">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#054906]/90 via-[#054906]/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-5">
+                    <span className="text-[#F59E0B] text-xs font-semibold uppercase tracking-wider mb-1">
                       {img.category}
                     </span>
                     <h4 className="text-white font-heading font-semibold text-lg leading-tight mb-3">
@@ -182,7 +181,7 @@ export default function MediaCenterSection() {
                     </h4>
                     <Button
                       size="sm"
-                      className="w-fit rounded-full bg-warm-gold text-forest-dark hover:bg-warm-gold-light text-xs font-semibold"
+                      className="w-fit rounded-full bg-[#F59E0B] text-[#042F2E] hover:bg-[#F59E0B]/80 text-xs font-semibold"
                     >
                       <ExternalLink className="w-3 h-3 mr-1.5" />
                       View
@@ -197,7 +196,7 @@ export default function MediaCenterSection() {
         {/* Video Showcase */}
         <div className="mb-20 reveal">
           <div className="flex items-center gap-3 mb-8">
-            <Film className="w-5 h-5 text-forest" />
+            <Film className="w-5 h-5 text-[#054906]" />
             <h3 className="text-xl font-heading font-semibold text-charcoal">
               Video Showcase
             </h3>
@@ -223,30 +222,26 @@ export default function MediaCenterSection() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
                   />
-                  {/* Dark overlay */}
                   <div className="absolute inset-0 bg-charcoal/50 group-hover:bg-charcoal/70 transition-colors duration-500" />
 
-                  {/* Play button */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <motion.div
-                      className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-warm-gold/90 flex items-center justify-center shadow-lg shadow-warm-gold/30"
+                      className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#F59E0B]/90 flex items-center justify-center shadow-lg shadow-[#F59E0B]/30"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Play className="w-6 h-6 md:w-8 md:h-8 text-forest-dark ml-1" />
+                      <Play className="w-6 h-6 md:w-8 md:h-8 text-[#042F2E] ml-1" />
                     </motion.div>
                   </div>
 
-                  {/* Duration badge */}
                   <div className="absolute top-4 right-4 bg-charcoal/70 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full">
                     {video.duration}
                   </div>
 
-                  {/* Video info */}
                   <div className="absolute bottom-0 left-0 right-0 p-5">
                     <div className="flex items-center gap-2 mb-2">
-                      <Film className="w-3.5 h-3.5 text-warm-gold" />
-                      <span className="text-warm-gold text-xs font-semibold uppercase tracking-wider">
+                      <Film className="w-3.5 h-3.5 text-[#F59E0B]" />
+                      <span className="text-[#F59E0B] text-xs font-semibold uppercase tracking-wider">
                         Video
                       </span>
                     </div>
@@ -263,7 +258,7 @@ export default function MediaCenterSection() {
         {/* Download Section */}
         <div className="reveal">
           <div className="flex items-center gap-3 mb-8">
-            <Download className="w-5 h-5 text-forest" />
+            <Download className="w-5 h-5 text-[#054906]" />
             <h3 className="text-xl font-heading font-semibold text-charcoal">
               Media Downloads
             </h3>
@@ -276,7 +271,7 @@ export default function MediaCenterSection() {
               return (
                 <motion.button
                   key={index}
-                  className="premium-card group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-border/50 hover:border-forest/20 text-center cursor-pointer"
+                  className="premium-card group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-border/50 hover:border-[#054906]/20 text-center cursor-pointer"
                   whileHover={{ y: -6 }}
                   transition={{
                     type: "spring",
@@ -285,8 +280,8 @@ export default function MediaCenterSection() {
                   }}
                   style={{ transitionDelay: `${index * 60}ms` }}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-forest/10 flex items-center justify-center group-hover:bg-forest group-hover:text-white transition-colors duration-300">
-                    <IconComp className="w-5 h-5 text-forest group-hover:text-white transition-colors duration-300" />
+                  <div className="w-12 h-12 rounded-xl bg-[#054906]/10 flex items-center justify-center group-hover:bg-[#054906] group-hover:text-white transition-colors duration-300">
+                    <IconComp className="w-5 h-5 text-[#054906] group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div>
                     <span className="block font-heading font-semibold text-charcoal text-sm">

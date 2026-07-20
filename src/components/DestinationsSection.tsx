@@ -50,7 +50,7 @@ export default function DestinationsSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center md:text-left mb-10 md:mb-14"
         >
-          <span className="text-warm-gold font-semibold tracking-widest text-sm uppercase">
+          <span className="text-[#F59E0B] font-semibold tracking-widest text-sm uppercase">
             DESTINATIONS
           </span>
           <h2 className="text-3xl md:text-5xl font-heading font-bold text-charcoal mt-3">
@@ -77,7 +77,7 @@ export default function DestinationsSection() {
                 onClick={() => setActiveCategory(cat)}
                 className={
                   activeCategory === cat
-                    ? "bg-forest text-white rounded-full px-5 py-2 text-sm font-medium whitespace-nowrap transition-colors duration-300"
+                    ? "bg-[#054906] text-white rounded-full px-5 py-2 text-sm font-medium whitespace-nowrap transition-colors duration-300"
                     : "bg-secondary text-charcoal/70 hover:bg-secondary/80 rounded-full px-5 py-2 text-sm font-medium whitespace-nowrap transition-colors duration-300"
                 }
               >
@@ -110,7 +110,7 @@ export default function DestinationsSection() {
                   loading="lazy"
                 />
                 {/* Category badge overlay */}
-                <span className="absolute top-3 left-3 bg-forest/80 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full">
+                <span className="absolute top-3 left-3 bg-[#054906]/80 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full">
                   {dest.category}
                 </span>
               </div>
@@ -121,7 +121,7 @@ export default function DestinationsSection() {
                   {/* Rating row */}
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-1.5 text-sm font-medium text-charcoal">
-                      <Star className="w-4 h-4 fill-warm-gold text-warm-gold" />
+                      <Star className="w-4 h-4 fill-[#F59E0B] text-[#F59E0B]" />
                       {dest.rating}
                     </div>
                   </div>
@@ -157,7 +157,7 @@ export default function DestinationsSection() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <Button className="bg-forest text-white hover:bg-forest-light rounded-full px-6 py-2 text-sm font-medium h-auto">
+                    <Button className="bg-[#054906] text-white hover:bg-[#054906]/80 rounded-full px-6 py-2 text-sm font-medium h-auto">
                       Explore
                       <ArrowRight className="w-4 h-4 ml-1.5" />
                     </Button>
@@ -201,7 +201,7 @@ export default function DestinationsSection() {
         >
           <Button
             variant="outline"
-            className="rounded-full px-8 py-3 text-sm font-medium border-forest text-forest hover:bg-forest hover:text-white transition-all duration-300"
+            className="rounded-full px-8 py-3 text-sm font-medium border-[#054906] text-[#054906] hover:bg-[#054906] hover:text-white transition-all duration-300"
           >
             View All Destinations
             <ArrowRight className="w-4 h-4 ml-2" />

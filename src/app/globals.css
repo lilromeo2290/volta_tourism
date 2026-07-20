@@ -81,18 +81,17 @@
   --font-heading: 'Poppins', sans-serif;
   --font-mono: var(--font-geist-mono);
 
-  --color-forest: #14532D;
+  --color-forest: #054906;
   --color-forest-light: #166534;
-  --color-forest-dark: #0A3019;
-  --color-volta-blue: #0EA5E9;
-  --color-volta-blue-light: #38BDF8;
-  --color-warm-gold: #F4B400;
-  --color-warm-gold-light: #FCD34D;
+  --color-forest-dark: #042F2E;
+  --color-volta-orange: #F59E0B;
+  --color-volta-orange-light: #FBBF24;
+  --color-volta-orange-lighter: #FEF3C7;
   --color-earth-brown: #7C5A3A;
-  --color-cream: #FAF7F0;
   --color-charcoal: #222222;
   --color-charcoal-light: #333333;
-  --color-cream-dark: #F0EBE0;
+  --color-light-gray: #F8F9FA;
+  --color-medium-gray: #6C757D;
 
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -131,37 +130,37 @@
 
 :root {
   --radius: 0.75rem;
-  --background: #FAF7F0;
+  --background: #FFFFFF;
   --foreground: #222222;
   --card: #FFFFFF;
   --card-foreground: #222222;
   --popover: #FFFFFF;
   --popover-foreground: #222222;
-  --primary: #14532D;
+  --primary: #054906;
   --primary-foreground: #FFFFFF;
-  --secondary: #F0EBE0;
+  --secondary: #F8F9FA;
   --secondary-foreground: #222222;
-  --muted: #F0EBE0;
-  --muted-foreground: #6B7280;
-  --accent: #F4B400;
+  --muted: #F8F9FA;
+  --muted-foreground: #6C757D;
+  --accent: #F59E0B;
   --accent-foreground: #222222;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #E5E1D8;
-  --input: #E5E1D8;
-  --ring: #14532D;
-  --chart-1: #14532D;
-  --chart-2: #0EA5E9;
-  --chart-3: #F4B400;
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #054906;
+  --chart-1: #054906;
+  --chart-2: #F59E0B;
+  --chart-3: #042F2E;
   --chart-4: #7C5A3A;
-  --chart-5: #38BDF8;
+  --chart-5: #FBBF24;
   --sidebar: #FFFFFF;
   --sidebar-foreground: #222222;
   --sidebar-primary: #14532D;
   --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #F0EBE0;
   --sidebar-accent-foreground: #222222;
-  --sidebar-border: #E5E1D8;
-  --sidebar-ring: #14532D;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #054906;
 }
 
 .dark {
@@ -215,14 +214,14 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF7F0;
+  background: #FFFFFF;
 }
 ::-webkit-scrollbar-thumb {
-  background: #14532D;
+  background: #054906;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #166534;
+  background: #042F2E;
 }
 .dark ::-webkit-scrollbar-track {
   background: #0A3019;
@@ -245,7 +244,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .glass-cream {
-  background: rgba(250, 247, 240, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -278,7 +277,7 @@ html {
   100% { background-position: 200% 0; }
 }
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent 0%, rgba(244,180,0,0.1) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.1) 50%, transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 3s infinite;
 }
@@ -295,7 +294,7 @@ html {
 }
 .premium-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(20, 83, 45, 0.15);
+  box-shadow: 0 25px 50px -12px rgba(5, 73, 6, 0.15);
 }
 
 /* Section reveal */
@@ -311,7 +310,7 @@ html {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #14532D 0%, #0EA5E9 50%, #F4B400 100%);
+  background: linear-gradient(135deg, #054906 0%, #F59E0B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -326,7 +325,7 @@ html {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(20, 83, 45, 0.7) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(5, 73, 6, 0.7) 100%);
   opacity: 0;
   transition: opacity 0.4s ease;
 }
@@ -370,13 +369,13 @@ html {
 
 /* Custom selection */
 ::selection {
-  background: #14532D;
+  background: #054906;
   color: #FFFFFF;
 }
 
 /* Focus visible */
 *:focus-visible {
-  outline: 2px solid #F4B400;
+  outline: 2px solid #F59E0B;
   outline-offset: 2px;
   border-radius: 4px;
 }

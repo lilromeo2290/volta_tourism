@@ -1,189 +1,100 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { events } from "@/lib/vth-data";
-import { MapPin, Calendar, Bookmark, Share2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
-const filterTabs = ["All", "Cultural", "Music", "Adventure", "Food"];
+const displayEvents = events.slice(0, 4);
+
+// Extract a short date format for display
+function formatEventDate(dateStr: string) {
+  // e.g. "November 2026" → { month: "NOV", day: "24", weekday: "Saturday" }
+  // Since data doesn't have exact dates, use the month
+  const months: Record<string, { month: string; day: string; weekday: string }> = {
+    January: { month: "JAN", day: "18", weekday: "Saturday" },
+    February: { month: "FEB", day: "15", weekday: "Saturday" },
+    March: { month: "MAR", day: "24", weekday: "Tuesday" },
+    April: { month: "APR", day: "12", weekday: "Saturday" },
+    May: { month: "MAY", day: "24", weekday: "Saturday" },
+    June: { month: "JUN", day: "14", weekday: "Saturday" },
+    July: { month: "JUL", day: "19", weekday: "Saturday" },
+    August: { month: "AUG", day: "24", weekday: "Saturday" },
+    September: { month: "SEP", day: "20", weekday: "Saturday" },
+    October: { month: "OCT", day: "25", weekday: "Saturday" },
+    November: { month: "NOV", day: "08", weekday: "Saturday" },
+    December: { month: "DEC", day: "13", weekday: "Saturday" },
+  };
+  const monthName = dateStr.split(" ")[0];
+  return months[monthName] || { month: "TBA", day: "TBA", weekday: "" };
+}
 
 export default function EventsSection() {
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const filtered =
-    activeFilter === "All"
-      ? events
-      : events.filter((e) => e.category === activeFilter);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.08 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section
-      id="events"
-      ref={sectionRef}
-      className="py-24 md:py-32 bg-cream"
-    >
+    <section id="events" className="py-16 bg-[#F8F9FA]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ── Header ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center mb-12 md:mb-16"
-        >
-          <span className="text-warm-gold font-semibold tracking-widest text-sm uppercase">
-            Events &amp; Festivals
-          </span>
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-charcoal mt-3">
-            Experience Living Culture
+        {/* Section Header */}
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl font-bold text-[#054906] tracking-tight">
+            UPCOMING EVENTS
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-            The Volta Region pulses with vibrant festivals, electrifying music
-            celebrations, thrilling adventures, and culinary feasts that bring
-            communities together all year round.
-          </p>
-        </motion.div>
+          <a
+            href="#events"
+            className="text-sm font-medium text-[#054906] hover:underline flex items-center gap-1"
+          >
+            View All
+            <span className="text-lg leading-none">&rarr;</span>
+          </a>
+        </div>
 
-        {/* ── Filter Tabs ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-          className="flex justify-center mb-10 md:mb-14"
-        >
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
-            {filterTabs.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveFilter(tab)}
-                className={
-                  activeFilter === tab
-                    ? "bg-forest text-white rounded-full px-5 py-2 text-sm font-medium whitespace-nowrap transition-colors duration-300"
-                    : "bg-secondary text-charcoal/70 hover:bg-secondary/80 rounded-full px-5 py-2 text-sm font-medium whitespace-nowrap transition-colors duration-300"
-                }
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ── Events Grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((event, idx) => (
-              <motion.div
+        {/* Vertical List */}
+        <div className="bg-white rounded-2xl overflow-hidden">
+          {displayEvents.map((event, index) => {
+            const dateInfo = formatEventDate(event.date);
+            return (
+              <div
                 key={event.id}
-                layout
-                initial={{ opacity: 0, y: 40, scale: 0.97 }}
-                animate={
-                  isVisible
-                    ? { opacity: 1, y: 0, scale: 1 }
-                    : { opacity: 0, y: 40, scale: 0.97 }
-                }
-                exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.08 * idx,
-                  ease: "easeOut",
-                  layout: { type: "spring", stiffness: 300, damping: 30 },
-                }}
-                className="rounded-2xl overflow-hidden bg-white shadow-sm premium-card group"
+                className={`flex items-center gap-4 md:gap-6 p-4 md:p-5 ${
+                  index < displayEvents.length - 1
+                    ? "border-b border-gray-100"
+                    : ""
+                } hover:bg-gray-50/50 transition-colors cursor-pointer`}
               >
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
+                {/* Date Column */}
+                <div className="shrink-0 w-16 md:w-20 text-center">
+                  <p className="text-xl md:text-2xl font-bold text-[#F59E0B] leading-tight">
+                    {dateInfo.day}
+                  </p>
+                  <p className="text-xs font-semibold text-[#054906] uppercase tracking-wide mt-0.5">
+                    {dateInfo.month}
+                  </p>
+                  {dateInfo.weekday && (
+                    <p className="text-xs text-gray-400 mt-0.5">
+                      {dateInfo.weekday}
+                    </p>
+                  )}
+                </div>
+
+                {/* Event Info */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-charcoal text-sm md:text-base leading-tight line-clamp-1">
+                    {event.title}
+                  </h3>
+                  <p className="text-xs md:text-sm text-gray-500 mt-1 line-clamp-1">
+                    {event.location}
+                  </p>
+                </div>
+
+                {/* Thumbnail */}
+                <div className="hidden sm:block shrink-0 w-20 h-14 md:w-28 md:h-18 rounded-lg overflow-hidden">
                   <img
                     src={event.image}
                     alt={event.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
-                  {/* Date badge — top left */}
-                  <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-warm-gold text-forest-dark text-xs font-semibold px-3 py-1.5 rounded-full shadow-md">
-                    <Calendar className="w-3 h-3" />
-                    {event.date}
-                  </div>
-
-                  {/* Category badge — top right */}
-                  <span className="absolute top-3 right-3 bg-forest/80 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full">
-                    {event.category}
-                  </span>
                 </div>
-
-                {/* Content */}
-                <div className="p-5">
-                  {/* Title */}
-                  <h3 className="text-lg font-heading font-bold text-charcoal leading-tight line-clamp-1">
-                    {event.title}
-                  </h3>
-
-                  {/* Location */}
-                  <p className="flex items-center gap-1.5 text-sm text-muted-foreground mt-2">
-                    <MapPin className="w-3.5 h-3.5 shrink-0 text-forest" />
-                    {event.location}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground line-clamp-2 mt-3 leading-relaxed">
-                    {event.description}
-                  </p>
-
-                  {/* Action buttons */}
-                  <div className="flex items-center gap-2 mt-5 pt-4 border-t border-border/50">
-                    <Button className="bg-forest text-white hover:bg-forest-light rounded-full px-5 py-2 text-sm font-medium h-auto">
-                      Register
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="rounded-full px-4 py-2 text-sm font-medium h-auto border-border/60 hover:bg-secondary"
-                    >
-                      <Bookmark className="w-4 h-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="rounded-full px-4 py-2 text-sm font-medium h-auto hover:bg-secondary"
-                    >
-                      <Share2 className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
-
-        {/* ── Empty State ── */}
-        {filtered.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-16"
-          >
-            <p className="text-muted-foreground text-lg">
-              No events found for this category.
-            </p>
-          </motion.div>
-        )}
       </div>
     </section>
   );

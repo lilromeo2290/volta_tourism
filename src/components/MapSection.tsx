@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { MapPin, Filter, Hotel, UtensilsCrossed, Compass, Plus, Fuel, Calendar, Bus, Camera, Map as MapIcon } from "lucide-react";
+import { MapPin, Hotel, UtensilsCrossed, Compass, Plus, Fuel, Calendar, Bus, Map as MapIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { mapCategories } from "@/lib/vth-data";
 
@@ -30,7 +30,7 @@ export default function MapSection() {
     <section
       id="map"
       ref={ref}
-      className="py-24 md:py-32 bg-cream-dark"
+      className="py-24 md:py-32 bg-[#F8F9FA]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -39,14 +39,14 @@ export default function MapSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <span className="text-warm-gold font-semibold tracking-widest text-sm uppercase">
+          <span className="text-[#F59E0B] font-semibold tracking-widest text-sm uppercase">
             INTERACTIVE MAP
           </span>
           <h2 className="text-3xl md:text-5xl font-heading font-bold text-charcoal mt-3">
             Navigate the Volta Region
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mt-4">
-            Explore our interactive map to find hotels, restaurants, tourist sites, and more across the Volta Region. Filter by category to find exactly what you need.
+            Explore our interactive map to find hotels, restaurants, tourist sites, and more across the Volta Region.
           </p>
         </motion.div>
 
@@ -66,8 +66,8 @@ export default function MapSection() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   isActive
-                    ? "bg-forest text-white shadow-md"
-                    : "bg-white text-charcoal/70 hover:bg-forest/5 hover:text-forest border border-border"
+                    ? "bg-[#054906] text-white shadow-md"
+                    : "bg-white text-charcoal/70 hover:bg-[#054906]/5 hover:text-[#054906] border border-border"
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -85,34 +85,29 @@ export default function MapSection() {
           className="relative rounded-3xl overflow-hidden shadow-2xl bg-white"
         >
           <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-            {/* Map Placeholder - Stylized SVG Map of Volta Region */}
-            <div className="absolute inset-0 bg-gradient-to-br from-forest/5 via-volta-blue/5 to-warm-gold/5">
-              {/* Decorative map grid */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#054906]/5 via-[#F59E0B]/5 to-[#054906]/5">
               <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#14532D" strokeWidth="0.5" />
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#054906" strokeWidth="0.5" />
                   </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#grid)" />
               </svg>
 
-              {/* Stylized region outline */}
               <svg
                 viewBox="0 0 800 450"
                 className="absolute inset-0 w-full h-full p-8 md:p-16"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                {/* Volta Region approximate outline */}
                 <path
                   d="M150,80 L250,50 L400,40 L550,60 L680,100 L720,180 L700,280 L650,350 L550,390 L400,410 L250,400 L150,350 L100,280 L80,200 L100,140 Z"
-                  fill="#14532D"
+                  fill="#054906"
                   fillOpacity="0.08"
-                  stroke="#14532D"
+                  stroke="#054906"
                   strokeWidth="2"
                   strokeOpacity="0.3"
                 />
-                {/* Lake Volta */}
                 <path
                   d="M200,100 L350,90 L500,100 L550,150 L520,200 L400,220 L280,210 L200,170 Z"
                   fill="#0EA5E9"
@@ -126,7 +121,6 @@ export default function MapSection() {
                 </text>
               </svg>
 
-              {/* Map Points */}
               {mapPoints
                 .filter((p) => activeCategory === "sites" || p.category === activeCategory || activeCategory === "sites")
                 .map((point, i) => (
@@ -142,10 +136,10 @@ export default function MapSection() {
                     }}
                   >
                     <div className="relative">
-                      <div className="w-8 h-8 bg-forest rounded-full flex items-center justify-center shadow-lg border-2 border-white transition-transform duration-300 group-hover:scale-125">
-                        <MapPin className="w-4 h-4 text-warm-gold" />
+                      <div className="w-8 h-8 bg-[#054906] rounded-full flex items-center justify-center shadow-lg border-2 border-white transition-transform duration-300 group-hover:scale-125">
+                        <MapPin className="w-4 h-4 text-[#F59E0B]" />
                       </div>
-                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-warm-gold rounded-full animate-ping opacity-75" />
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#F59E0B] rounded-full animate-ping opacity-75" />
                       <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-2 bg-charcoal text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none shadow-lg">
                         {point.name}
                         <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-charcoal" />
@@ -159,11 +153,11 @@ export default function MapSection() {
 
         {/* Quick access buttons */}
         <div className="flex flex-wrap justify-center gap-4 mt-8">
-          <Button variant="outline" className="rounded-full px-6 border-forest text-forest hover:bg-forest hover:text-white">
+          <Button variant="outline" className="rounded-full px-6 border-[#054906] text-[#054906] hover:bg-[#054906] hover:text-white">
             <Compass className="w-4 h-4 mr-2" />
             Get Directions
           </Button>
-          <Button variant="outline" className="rounded-full px-6 border-forest text-forest hover:bg-forest hover:text-white">
+          <Button variant="outline" className="rounded-full px-6 border-[#054906] text-[#054906] hover:bg-[#054906] hover:text-white">
             <Download className="w-4 h-4 mr-2" />
             Download Map
           </Button>
