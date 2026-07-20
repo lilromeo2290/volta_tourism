@@ -240,8 +240,16 @@ export default function Footer() {
               </a>
             </div>
 
-            <p className="text-xs text-white/30 hidden lg:block">
-              Made with <span className="text-[#F59E0B]">❤️</span> for Volta
+            <p className="text-xs text-white/50">
+              Developed and Hosted by{" "}
+              <a
+                href="https://clipe233eng.net"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#F59E0B] hover:text-[#FBBF24] font-semibold transition-colors"
+              >
+                CLIPE233 ENGINEERS
+              </a>
             </p>
           </div>
         </div>
