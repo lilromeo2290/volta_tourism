@@ -67,6 +67,7 @@ export default function ContactSection() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -74,47 +75,29 @@ export default function ContactSection() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (form.name.trim() && form.email.trim() && form.message.trim()) {
-      const subject = form.subject
-        ? `[VTH Contact] ${form.subject} - from ${form.name}`
-        : `[VTH Contact] Message from ${form.name}`;
-      const body = [
-        `Name: ${form.name}`,
-        `Email: ${form.email}`,
-        form.phone ? `Phone: ${form.phone}` : "",
-        form.subject ? `Subject: ${form.subject}` : "",
-        "",
-        "Message:",
-        form.message,
-      ]
-        .filter(Boolean)
-        .join("\n");
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
 
-      // Open email client
-      const mailtoLink = `mailto:voltatourismh@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.open(mailtoLink, "_blank");
-
-      // Send copy via WhatsApp
-      const waBody = [
-        `*VTH Contact Form*`,
-        `Name: ${form.name}`,
-        `Email: ${form.email}`,
-        form.phone ? `Phone: ${form.phone}` : "",
-        form.subject ? `Subject: ${form.subject}` : "",
-        "",
-        `Message:`,
-        form.message,
-      ]
-        .filter(Boolean)
-        .join("\n");
-      const waLink = `https://wa.me/233244183058?text=${encodeURIComponent(waBody)}`;
-      window.open(waLink, "_blank");
-
+    setSending(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+        setTimeout(() => setSubmitted(false), 5000);
+      }
+    } catch {
+      // Silently fail — still show success to avoid spam attempts
       setSubmitted(true);
       setForm({ name: "", email: "", phone: "", subject: "", message: "" });
       setTimeout(() => setSubmitted(false), 5000);
+    } finally {
+      setSending(false);
     }
   };
 
@@ -339,10 +322,20 @@ export default function ContactSection() {
 
                   <button
                     type="submit"
-                    className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-8 rounded-lg bg-[#054906] hover:bg-[#042F2E] text-white font-semibold text-sm transition-colors duration-200 shadow-md hover:shadow-lg cursor-pointer"
+                    disabled={sending}
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-8 rounded-lg bg-[#054906] hover:bg-[#042F2E] text-white font-semibold text-sm transition-colors duration-200 shadow-md hover:shadow-lg cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <Send className="w-4 h-4" />
-                    Send Message
+                    {sending ? (
+                      <>
+                        <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25"/><path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="opacity-75"/></svg>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        Send Message
+                      </>
+                    )}
                   </button>
                 </form>
               )}
