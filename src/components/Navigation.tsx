@@ -81,17 +81,11 @@ export default function Navigation() {
               onClick={() => handleNav("#home")}
               className="flex items-center gap-2.5 group"
             >
-              <div className="w-10 h-10 bg-forest rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                <MapIcon className="w-5 h-5 text-warm-gold" />
-              </div>
-              <div className="hidden sm:block">
-                <span className="font-heading font-bold text-forest text-lg leading-tight block">
-                  VTH
-                </span>
-                <span className="text-[10px] text-charcoal/50 font-medium tracking-wide leading-none block">
-                  VOLTA TOURISM HUB
-                </span>
-              </div>
+              <img
+                src="/vth-logo.jpg"
+                alt="Volta Tourism Hub"
+                className="h-11 w-auto object-contain rounded-lg group-hover:shadow-lg transition-shadow"
+              />
             </button>
 
             {/* Desktop Nav */}
@@ -166,17 +160,11 @@ export default function Navigation() {
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between p-4 sm:p-6">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 bg-forest rounded-xl flex items-center justify-center">
-                    <MapIcon className="w-5 h-5 text-warm-gold" />
-                  </div>
-                  <div>
-                    <span className="font-heading font-bold text-forest text-lg block">
-                      VTH
-                    </span>
-                    <span className="text-[10px] text-charcoal/50 font-medium tracking-wide block">
-                      VOLTA TOURISM HUB
-                    </span>
-                  </div>
+                  <img
+                    src="/vth-logo.jpg"
+                    alt="Volta Tourism Hub"
+                    className="h-11 w-auto object-contain rounded-lg"
+                  />
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}

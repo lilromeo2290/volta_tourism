@@ -87,17 +87,11 @@ export default function Footer() {
             {/* Column 1 - Brand */}
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-warm-gold/20 flex items-center justify-center">
-                  <Map className="w-5 h-5 text-warm-gold" />
-                </div>
-                <div>
-                  <span className="font-heading font-bold text-lg text-white leading-none block">
-                    VTH
-                  </span>
-                  <span className="text-[10px] uppercase tracking-widest text-white/50 font-medium">
-                    Volta Tourism Hub
-                  </span>
-                </div>
+                <img
+                  src="/vth-logo.jpg"
+                  alt="Volta Tourism Hub"
+                  className="h-11 w-auto object-contain rounded-lg brightness-0 invert"
+                />
               </div>
 
               <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-xs">
