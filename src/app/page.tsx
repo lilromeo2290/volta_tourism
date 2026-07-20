@@ -44,7 +44,7 @@ export default function Home() {
       <AIChatbot />
       {/* WhatsApp Float */}
       <a
-        href="https://wa.me/233XXXXXXXXX"
+        href="https://wa.me/233244183058"
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"
