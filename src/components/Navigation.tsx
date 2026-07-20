@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun, Heart, Map as MapIcon } from "lucide-react";
+import { Menu, X, Moon, Sun, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useVTH } from "@/components/vth-provider";
 
@@ -23,6 +23,9 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const sectionRefs = useRef(new Map());
+
+  // Track if we're over the hero (transparent → white text)
+  const isOverHero = activeSection === "home" && !scrolled;
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 50);
@@ -84,32 +87,45 @@ export default function Navigation() {
               <img
                 src="/vth-logo.jpg"
                 alt="Volta Tourism Hub"
-                className="h-20 w-auto object-contain rounded-lg group-hover:shadow-lg transition-shadow"
+                className={`h-20 w-auto object-contain rounded-lg transition-shadow ${
+                  isOverHero ? "brightness-0 invert drop-shadow-lg" : ""
+                } group-hover:shadow-lg`}
               />
             </button>
 
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <button
-                  key={link.href}
-                  onClick={() => handleNav(link.href)}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
-                    activeSection === link.href.replace("#", "")
-                      ? "text-forest font-semibold bg-forest/5"
-                      : "text-charcoal/70 hover:text-forest hover:bg-forest/5"
-                  }`}
-                >
-                  {link.label}
-                </button>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.replace("#", "");
+                return (
+                  <button
+                    key={link.href}
+                    onClick={() => handleNav(link.href)}
+                    className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
+                      isOverHero
+                        ? isActive
+                          ? "text-white font-semibold bg-white/15"
+                          : "text-white/80 hover:text-white hover:bg-white/10"
+                        : isActive
+                          ? "text-forest font-semibold bg-forest/5"
+                          : "text-charcoal/70 hover:text-forest hover:bg-forest/5"
+                    }`}
+                  >
+                    {link.label}
+                  </button>
+                );
+              })}
             </div>
 
             {/* Right Actions */}
             <div className="flex items-center gap-2">
               <button
                 onClick={toggleDarkMode}
-                className="w-10 h-10 rounded-xl flex items-center justify-center text-charcoal/60 hover:text-forest hover:bg-forest/5 transition-all"
+                className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                  isOverHero
+                    ? "text-white/80 hover:text-white hover:bg-white/10"
+                    : "text-charcoal/60 hover:text-forest hover:bg-forest/5"
+                }`}
                 aria-label="Toggle dark mode"
               >
                 {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -117,7 +133,11 @@ export default function Navigation() {
 
               <button
                 onClick={() => handleNav("#planner")}
-                className="relative w-10 h-10 rounded-xl flex items-center justify-center text-charcoal/60 hover:text-forest hover:bg-forest/5 transition-all"
+                className={`relative w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                  isOverHero
+                    ? "text-white/80 hover:text-white hover:bg-white/10"
+                    : "text-charcoal/60 hover:text-forest hover:bg-forest/5"
+                }`}
                 aria-label="Favourites"
               >
                 <Heart className="w-5 h-5" />
@@ -130,14 +150,22 @@ export default function Navigation() {
 
               <Button
                 onClick={() => handleNav("#planner")}
-                className="hidden sm:flex bg-warm-gold text-forest-dark hover:bg-warm-gold-light font-semibold rounded-full px-5 py-2.5 shadow-md hover:shadow-lg transition-all text-sm"
+                className={`hidden sm:flex font-semibold rounded-full px-5 py-2.5 shadow-md hover:shadow-lg transition-all text-sm ${
+                  isOverHero
+                    ? "bg-white/15 text-white border border-white/30 hover:bg-white/25 backdrop-blur-sm"
+                    : "bg-warm-gold text-forest-dark hover:bg-warm-gold-light"
+                }`}
               >
                 Plan Your Trip
               </Button>
 
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="lg:hidden w-10 h-10 rounded-xl flex items-center justify-center text-charcoal/70 hover:text-forest transition-colors"
+                className={`lg:hidden w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                  isOverHero
+                    ? "text-white hover:bg-white/10"
+                    : "text-charcoal/70 hover:text-forest"
+                }`}
                 aria-label="Open menu"
               >
                 <Menu className="w-6 h-6" />
