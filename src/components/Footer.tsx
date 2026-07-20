@@ -90,7 +90,7 @@ export default function Footer() {
                 <img
                   src="/vth-logo.jpg"
                   alt="Volta Tourism Hub"
-                  className="h-11 w-auto object-contain rounded-lg brightness-0 invert"
+                  className="h-14 w-auto object-contain rounded-lg brightness-0 invert"
                 />
               </div>
 
