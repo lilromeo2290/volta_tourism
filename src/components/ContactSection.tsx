@@ -17,8 +17,8 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Phone",
-    value: "+233 244 183 058",
-    href: "tel:+233244183058",
+    value: "+233 202 892 223 / +233 244 183 058",
+    href: "tel:+233202892223",
     color: "#054906",
   },
   {
@@ -31,8 +31,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@voltatourismhub.com",
-    href: "mailto:info@voltatourismhub.com",
+    value: "voltatourismh@gmail.com / info@voltatourismhub.com",
+    href: "mailto:voltatourismh@gmail.com",
     color: "#F59E0B",
   },
   {
