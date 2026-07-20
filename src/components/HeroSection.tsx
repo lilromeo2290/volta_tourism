@@ -96,7 +96,7 @@ export default function HeroSection() {
       />
 
       {/* ---- Left-aligned main content ---- */}
-      <div className="relative z-10 flex h-full flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-20 pb-40">
+      <div className="relative z-10 flex h-full flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-28 sm:pt-32 lg:pt-44 pb-40">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

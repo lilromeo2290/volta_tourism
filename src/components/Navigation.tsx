@@ -124,30 +124,30 @@ export default function Navigation() {
           scrolled ? "shadow-md" : ""
         }`}
       >
-        <nav className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="flex items-center justify-between h-16 lg:h-[72px]">
-            {/* Logo */}
+            {/* Logo - Vertical, overlapping the navbar */}
             <button
               onClick={() => handleNav("#home")}
-              className="flex items-center gap-3 shrink-0"
+              className="absolute left-4 sm:left-6 lg:left-8 top-0 z-10 flex flex-col items-center"
             >
               <img
                 src="/vth-logo.jpg"
                 alt="Volta Tourism Hub"
-                className="h-10 w-auto object-contain"
+                className="h-28 sm:h-32 lg:h-40 w-auto object-contain drop-shadow-md"
               />
-              <div className="hidden sm:block leading-tight">
-                <p className="text-[#F59E0B] font-bold font-[Poppins,sans-serif] text-sm tracking-wide">
+              <div className="hidden sm:block leading-tight -mt-1">
+                <p className="text-[#F59E0B] font-bold font-[Poppins,sans-serif] text-[11px] tracking-wide">
                   VOLTA TOURISM HUB
                 </p>
-                <p className="text-[#054906] text-[10px] tracking-wider">
+                <p className="text-[#054906] text-[9px] tracking-wider">
                   Tourism &bull; Heritage &amp; Identity
                 </p>
               </div>
             </button>
 
-            {/* Desktop Nav Links - Center */}
-            <div className="hidden lg:flex items-center gap-0.5">
+            {/* Desktop Nav Links - Offset right to avoid logo overlap */}
+            <div className="hidden lg:flex items-center gap-0.5 lg:pl-44">
               {navLinks.map((link) => {
                 const isActive =
                   activeSection === link.href.replace("#", "") ||
