@@ -361,7 +361,7 @@ export default function Navigation() {
                           isActive
                             ? "bg-[#054906]/5"
                             : "hover:text-[#042F2E]"
-                        }`}]
+                        }`}
                       >
                         {link.label}
                       </motion.button>
