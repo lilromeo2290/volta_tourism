@@ -10,7 +10,6 @@ const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Explore", href: "#experiences" },
   { label: "Destinations", href: "#destinations" },
-  { label: "Plan Trip", href: "#planner" },
   { label: "Events", href: "#events" },
   { label: "Stories", href: "#stories" },
   { label: "Invest", href: "#investment" },
