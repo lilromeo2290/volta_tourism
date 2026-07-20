@@ -132,7 +132,7 @@ export default function Navigation() {
               className="absolute left-4 sm:left-6 lg:left-8 top-0 z-10 flex flex-col items-center"
             >
               <img
-                src="/vth-logo.jpg"
+                src="/vth-logo.png"
                 alt="Volta Tourism Hub"
                 className="h-28 sm:h-32 lg:h-40 w-auto object-contain drop-shadow-md"
               />
@@ -165,10 +165,10 @@ export default function Navigation() {
                   >
                     <button
                       onClick={() => handleNav(link.href)}
-                      className={`flex items-center gap-1 px-2.5 py-2 text-[13px] font-medium tracking-wide transition-colors duration-200 ${
+                      className={`flex items-center gap-1 px-2.5 py-2 text-[13px] font-bold tracking-wide transition-colors duration-200 text-[#054906] ${
                         isActive
-                          ? "text-[#054906] font-semibold"
-                          : "text-[#222222] hover:text-[#054906]"
+                          ? "underline underline-offset-4"
+                          : "hover:text-[#042F2E]"
                       }`}
                     >
                       {link.label}
@@ -197,10 +197,10 @@ export default function Navigation() {
                               <button
                                 key={item.href}
                                 onClick={() => handleNav(item.href)}
-                                className={`block w-full text-left px-4 py-2 text-sm transition-colors ${
+                                className={`block w-full text-left px-4 py-2 text-sm font-bold transition-colors text-[#054906] ${
                                   activeSection === item.href.replace("#", "")
-                                    ? "text-[#054906] font-semibold bg-[#054906]/5"
-                                    : "text-[#222222] hover:text-[#054906] hover:bg-gray-50"
+                                    ? "bg-[#054906]/5"
+                                    : "hover:bg-gray-50"
                                 }`}
                               >
                                 {item.label}
@@ -262,7 +262,7 @@ export default function Navigation() {
                   className="flex items-center gap-3"
                 >
                   <img
-                    src="/vth-logo.jpg"
+                    src="/vth-logo.png"
                     alt="Volta Tourism Hub"
                     className="h-9 w-auto object-contain"
                   />
@@ -305,10 +305,10 @@ export default function Navigation() {
                         >
                           <button
                             onClick={() => toggleMobileDropdown(link.label)}
-                            className={`flex items-center justify-between w-full py-3 px-4 text-base font-medium rounded-lg transition-colors ${
+                            className={`flex items-center justify-between w-full py-3 px-4 text-base font-bold rounded-lg transition-colors text-[#054906] ${
                               isActive
-                                ? "text-[#054906] font-semibold"
-                                : "text-[#222222] hover:text-[#054906]"
+                                ? "bg-[#054906]/5"
+                                : "hover:text-[#042F2E]"
                             }`}
                           >
                             {link.label}
@@ -332,11 +332,11 @@ export default function Navigation() {
                                     <button
                                       key={item.href}
                                       onClick={() => handleNav(item.href)}
-                                      className={`block w-full text-left py-2.5 px-4 text-sm rounded-lg transition-colors ${
+                                      className={`block w-full text-left py-2.5 px-4 text-sm font-bold rounded-lg transition-colors text-[#054906] ${
                                         activeSection ===
                                         item.href.replace("#", "")
-                                          ? "text-[#054906] font-semibold bg-[#054906]/5"
-                                          : "text-[#555555] hover:text-[#054906] hover:bg-gray-50"
+                                          ? "bg-[#054906]/5"
+                                          : "hover:text-[#042F2E] hover:bg-gray-50"
                                       }`}
                                     >
                                       {item.label}
@@ -357,11 +357,11 @@ export default function Navigation() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.04 }}
                         onClick={() => handleNav(link.href)}
-                        className={`block w-full text-left py-3 px-4 text-base font-medium rounded-lg transition-colors ${
+                        className={`block w-full text-left py-3 px-4 text-base font-bold rounded-lg transition-colors text-[#054906] ${
                           isActive
-                            ? "text-[#054906] font-semibold bg-[#054906]/5"
-                            : "text-[#222222] hover:text-[#054906]"
-                        }`}
+                            ? "bg-[#054906]/5"
+                            : "hover:text-[#042F2E]"
+                        }`}]
                       >
                         {link.label}
                       </motion.button>

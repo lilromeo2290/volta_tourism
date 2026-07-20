@@ -103,9 +103,9 @@ export default function Footer() {
             <div>
               <div className="flex items-center gap-2.5 mb-4">
                 <img
-                  src="/vth-logo.jpg"
+                  src="/vth-logo.png"
                   alt="Volta Tourism Hub"
-                  className="h-16 w-auto object-contain rounded-lg brightness-0 invert"
+                  className="h-16 w-auto object-contain"
                 />
               </div>
               <p className="text-lg font-semibold text-[#F59E0B]">
