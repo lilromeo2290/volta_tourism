@@ -248,7 +248,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-[#F59E0B] hover:text-[#FBBF24] font-semibold transition-colors"
               >
-                CLIPE233 ENGINEERS
+                CLIPE CONSULT
               </a>
             </p>
           </div>
