@@ -177,7 +177,7 @@ export default function DestinationsSection() {
                 </h3>
                 <div className="flex items-center text-gray-500 mb-3">
                   <MapPin className="w-4 h-4 mr-1 text-[#054906]" />
-                  <span className="text-sm">{dest.location}</span>
+                  <span className="text-sm">{dest.municipality}</span>
                 </div>
                 <p className="text-gray-600 text-sm line-clamp-2">
                   {dest.description}
@@ -215,7 +215,7 @@ export default function DestinationsSection() {
               </h3>
               <div className="flex items-center text-gray-500 mb-4">
                 <MapPin className="w-5 h-5 mr-2 text-[#054906]" />
-                <span>{selectedDestination.location}</span>
+                <span>{selectedDestination.municipality}</span>
               </div>
               <p className="text-gray-600 leading-relaxed mb-6">
                 {selectedDestination.description}
