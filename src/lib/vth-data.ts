@@ -153,7 +153,7 @@ export const destinations: Destination[] = [
     rating: 4.4,
     distance: "200 km from Accra",
     travelTime: "3 hours drive",
-    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80",
+    image: "/tafi-atome-sanctuary.jpg",
     description:
       "A birdwatcher's paradise nestled along the Volta River, Xavi Bird Sanctuary hosts over 300 bird species. Explore by canoe through flooded forests and savanna wetlands while spotting kingfishers, herons, and rare migratory species.",
     highlights: ["300+ bird species", "Canoe safari", "Volta River scenery", "Photography paradise"],
