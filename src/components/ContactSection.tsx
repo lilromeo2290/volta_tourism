@@ -17,14 +17,14 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Phone",
-    value: "+233 202 892 223 / +233 244 183 058",
+    value: "+233 202 892 223 / +233 24 418 3058",
     href: "tel:+233202892223",
     color: "#054906",
   },
   {
     icon: MessageCircle,
     label: "WhatsApp",
-    value: "+233 244 183 058",
+    value: "+233 24 418 3058",
     href: "https://wa.me/233244183058",
     color: "#25D366",
   },
@@ -199,7 +199,7 @@ export default function ContactSection() {
                     href="tel:+233244183058"
                     className="text-[#F59E0B] hover:text-[#FBBF24] transition-colors"
                   >
-                    +233 244 183 058
+                    +233 24 418 3058
                   </a>
                 </p>
               </div>
