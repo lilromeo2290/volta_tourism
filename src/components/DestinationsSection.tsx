@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { destinations } from "@/lib/vth-data";
 import { useVTH } from "@/components/vth-provider";
-import { MapPin, Star, Clock, Route, ArrowRight, Heart } from "lucide-react";
+import { MapPin, Star, Clock, Route, ArrowRight, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const categories = ["All", "Waterfall", "Mountain", "Beach", "Wildlife", "Nature", "Culture"];
@@ -101,16 +101,20 @@ export default function DestinationsSection() {
               }}
               className="group flex flex-col md:flex-row bg-white border border-border/60 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-400 hover:-translate-y-1"
             >
-              {/* Image */}
-              <div className="relative w-full md:w-80 shrink-0 h-56 md:h-auto">
-                <img
-                  src={dest.image}
-                  alt={dest.name}
-                  className="w-full h-full object-cover rounded-xl md:rounded-l-xl md:rounded-r-none"
-                  loading="lazy"
-                />
+              {/* Image / Slider */}
+              <div className="relative w-full md:w-80 shrink-0 h-56 md:h-auto overflow-hidden group/img">
+                {dest.images && dest.images.length > 1 ? (
+                  <DestinationImageSlider images={dest.images} name={dest.name} />
+                ) : (
+                  <img
+                    src={dest.image}
+                    alt={dest.name}
+                    className="w-full h-full object-cover rounded-xl md:rounded-l-xl md:rounded-r-none"
+                    loading="lazy"
+                  />
+                )}
                 {/* Category badge overlay */}
-                <span className="absolute top-3 left-3 bg-[#054906]/80 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full">
+                <span className="absolute top-3 left-3 bg-[#054906]/80 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full z-10">
                   {dest.category}
                 </span>
               </div>
@@ -209,5 +213,81 @@ export default function DestinationsSection() {
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function DestinationImageSlider({ images, name }: { images: string[]; name: string }) {
+  const [current, setCurrent] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval>>();
+
+  const next = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % images.length);
+  }, [images.length]);
+
+  const prev = useCallback(() => {
+    setCurrent((p) => (p - 1 + images.length) % images.length);
+  }, [images.length]);
+
+  useEffect(() => {
+    timerRef.current = setInterval(next, 4000);
+    return () => clearInterval(timerRef.current);
+  }, [next]);
+
+  return (
+    <div
+      className="relative w-full h-full"
+      onMouseEnter={() => clearInterval(timerRef.current)}
+      onMouseLeave={() => {
+        timerRef.current = setInterval(next, 4000);
+      }}
+    >
+      {images.map((img, i) => (
+        <img
+          key={i}
+          src={img}
+          alt={`${name} - ${i + 1}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+            i === current ? "opacity-100" : "opacity-0"
+          }`}
+          loading={i === 0 ? "eager" : "lazy"}
+        />
+      ))}
+
+      {/* Arrows */}
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={prev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity"
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity"
+            aria-label="Next image"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </>
+      )}
+
+      {/* Dots */}
+      {images.length > 1 && (
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                i === current ? "bg-white w-4" : "bg-white/50 hover:bg-white/70"
+              }`}
+              aria-label={`Go to image ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

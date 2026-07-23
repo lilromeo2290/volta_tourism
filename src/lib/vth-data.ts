@@ -11,6 +11,7 @@ export interface Destination {
   distance: string;
   travelTime: string;
   image: string;
+  images?: string[];
   description: string;
   highlights: string[];
 }
@@ -154,6 +155,7 @@ export const destinations: Destination[] = [
     distance: "200 km from Accra",
     travelTime: "3 hours drive",
     image: "/tafi-atome-sanctuary.jpg",
+    images: ["/tafi-atome-sanctuary.jpg"],
     description:
       "A birdwatcher's paradise nestled along the Volta River, Xavi Bird Sanctuary hosts over 300 bird species. Explore by canoe through flooded forests and savanna wetlands while spotting kingfishers, herons, and rare migratory species.",
     highlights: ["300+ bird species", "Canoe safari", "Volta River scenery", "Photography paradise"],
