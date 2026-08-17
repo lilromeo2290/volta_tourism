@@ -134,6 +134,77 @@ function WeatherWidget() {
   );
 }
 
+function ForexWidget() {
+  const [rates, setRates] = useState<{ currency: string; rate: number; flag: string }[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRates = async () => {
+      try {
+        const res = await fetch(
+          "https://api.frankfurter.app/latest?from=GHS&to=USD,EUR,GBP,NGN,CNY"
+        );
+        const data = await res.json();
+        const flags: Record<string, string> = { USD: "\uD83C\uDDFA\uD83C\uDDF8", EUR: "\uD83C\uDEA7\uD83C\uDDFA", GBP: "\uD83C\uDCEC\uD83C\uDDE7", NGN: "\uD83C\uDDF3\uD83C\uDDEC", CNY: "\uD83C\uDDE8\uD83C\uDDF3" };
+        const entries = Object.entries(data.rates).map(([currency, rate]) => ({
+          currency,
+          rate: 1 / (rate as number),
+          flag: flags[currency] || "\uD83C\uDFDB\uFE0F",
+        }));
+        setRates(entries);
+      } catch {
+        setRates([
+          { currency: "USD", rate: 15.45, flag: "\uD83C\uDDFA\uD83C\uDDF8" },
+          { currency: "EUR", rate: 16.82, flag: "\uD83C\uDEA7\uD83C\uDDFA" },
+          { currency: "GBP", rate: 19.60, flag: "\uD83C\uDCEC\uD83C\uDDE7" },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRates();
+    const interval = setInterval(fetchRates, 600000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[200px] animate-pulse">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-5 h-5 rounded bg-white/10" />
+          <div className="h-3 w-28 bg-white/10 rounded" />
+        </div>
+        <div className="space-y-2">
+          <div className="h-3 w-full bg-white/10 rounded" />
+          <div className="h-3 w-full bg-white/10 rounded" />
+          <div className="h-3 w-3/4 bg-white/10 rounded" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[200px]">
+      <div className="flex items-center gap-2 mb-3">
+        <span className="text-sm">\uD83C\uDDEC\uD83C\uDDED</span>
+        <p className="text-white/80 text-xs font-semibold uppercase tracking-wider">Forex Rates</p>
+      </div>
+      <p className="text-white/50 text-[10px] mb-2.5">1 GHS =</p>
+      <div className="space-y-1.5">
+        {rates.map(({ currency, rate, flag }) => (
+          <div key={currency} className="flex items-center justify-between text-white/80 text-xs">
+            <span className="flex items-center gap-1.5">
+              <span>{flag}</span>
+              <span className="font-medium">{currency}</span>
+            </span>
+            <span className="font-mono tabular-nums">{rate.toFixed(4)}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -258,7 +329,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* ---- Right side: Weather + Sustainable Tourism ---- */}
+      {/* ---- Right side: Weather + Forex ---- */}
       <div className="absolute top-1/2 -translate-y-1/2 right-6 sm:right-10 md:right-16 z-20 hidden md:flex flex-col gap-4">
         <motion.div
           initial={{ opacity: 0, x: 40 }}
@@ -272,12 +343,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
         >
-          <div className="bg-[#054906] text-white rounded-2xl p-5 max-w-[200px]">
-            <p className="font-bold text-sm">SUSTAINABLE TOURISM</p>
-            <p className="text-white/70 text-xs mt-1.5 leading-relaxed">
-              Stronger Communities, Brighter Future
-            </p>
-          </div>
+          <ForexWidget />
         </motion.div>
       </div>
 
