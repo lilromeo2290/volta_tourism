@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronLeft, ChevronRight, MapPin, Calendar } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, MapPin, Calendar, CloudSun, Droplets, Wind, Eye, Thermometer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { heroSlides, searchCategories } from "@/lib/vth-data";
 
@@ -15,6 +15,124 @@ const quickFilters = [
   { label: "Stay", icon: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg> },
   { label: "Eat", icon: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg> },
 ];
+
+interface WeatherData {
+  temp: number;
+  feelsLike: number;
+  humidity: number;
+  windSpeed: number;
+  condition: string;
+  icon: string;
+  visibility: number;
+}
+
+const weatherCodeMap: Record<number, { condition: string; icon: string }> = {
+  0: { condition: "Clear Sky", icon: "\u2600\uFE0F" },
+  1: { condition: "Mainly Clear", icon: "\uD83C\uDF24\uFE0F" },
+  2: { condition: "Partly Cloudy", icon: "\u26C5" },
+  3: { condition: "Overcast", icon: "\u2601\uFE0F" },
+  45: { condition: "Foggy", icon: "\uD83C\uDF2B\uFE0F" },
+  48: { condition: "Rime Fog", icon: "\uD83C\uDF2B\uFE0F" },
+  51: { condition: "Light Drizzle", icon: "\uD83C\uDF26\uFE0F" },
+  53: { condition: "Drizzle", icon: "\uD83C\uDF27\uFE0F" },
+  55: { condition: "Dense Drizzle", icon: "\uD83C\uDF27\uFE0F" },
+  61: { condition: "Slight Rain", icon: "\uD83C\uDF27\uFE0F" },
+  63: { condition: "Moderate Rain", icon: "\uD83C\uDF27\uFE0F" },
+  65: { condition: "Heavy Rain", icon: "\uD83C\uDF27\uFE0F" },
+  71: { condition: "Slight Snow", icon: "\uD83C\uDF28\uFE0F" },
+  73: { condition: "Moderate Snow", icon: "\u2744\uFE0F" },
+  75: { condition: "Heavy Snow", icon: "\u2744\uFE0F" },
+  80: { condition: "Rain Showers", icon: "\uD83C\uDF26\uFE0F" },
+  81: { condition: "Moderate Showers", icon: "\uD83C\uDF27\uFE0F" },
+  82: { condition: "Violent Showers", icon: "\uD83C\uDF27\uFE0F" },
+  95: { condition: "Thunderstorm", icon: "\u26C8\uFE0F" },
+};
+
+function WeatherWidget() {
+  const [weather, setWeather] = useState<WeatherData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const res = await fetch(
+          "https://api.open-meteo.com/v1/forecast?latitude=6.61&longitude=0.47&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,visibility&timezone=Africa/Accra"
+        );
+        const data = await res.json();
+        const code = data.current?.weather_code ?? 0;
+        const mapped = weatherCodeMap[code] || { condition: "Fair", icon: "\u2600\uFE0F" };
+        setWeather({
+          temp: Math.round(data.current?.temperature_2m ?? 0),
+          feelsLike: Math.round(data.current?.apparent_temperature ?? 0),
+          humidity: data.current?.relative_humidity_2m ?? 0,
+          windSpeed: Math.round(data.current?.wind_speed_10m ?? 0),
+          condition: mapped.condition,
+          icon: mapped.icon,
+          visibility: Math.round((data.current?.visibility ?? 10000) / 1000),
+        });
+      } catch {
+        setWeather({
+          temp: 28, feelsLike: 30, humidity: 75, windSpeed: 12,
+          condition: "Partly Cloudy", icon: "\u26C5", visibility: 10,
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchWeather();
+    const interval = setInterval(fetchWeather, 600000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[200px] animate-pulse">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-8 h-8 rounded-full bg-white/10" />
+          <div className="h-3 w-24 bg-white/10 rounded" />
+        </div>
+        <div className="h-8 w-16 bg-white/10 rounded mb-2" />
+        <div className="h-2 w-32 bg-white/10 rounded" />
+      </div>
+    );
+  }
+
+  if (!weather) return null;
+
+  return (
+    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[200px]">
+      <div className="flex items-center gap-2 mb-3">
+        <CloudSun className="w-4 h-4 text-[#F59E0B]" />
+        <p className="text-white/80 text-xs font-semibold uppercase tracking-wider">Ho, Volta Region</p>
+      </div>
+      <div className="flex items-start gap-3">
+        <span className="text-4xl leading-none">{weather.icon}</span>
+        <div>
+          <p className="text-3xl font-bold text-white leading-none">{weather.temp}<span className="text-lg font-normal text-white/60">°C</span></p>
+          <p className="text-white/60 text-xs mt-1">{weather.condition}</p>
+        </div>
+      </div>
+      <div className="mt-3 pt-3 border-t border-white/10 grid grid-cols-2 gap-x-4 gap-y-1.5">
+        <div className="flex items-center gap-1.5 text-white/60 text-[11px]">
+          <Thermometer className="w-3 h-3" />
+          <span>Feels {weather.feelsLike}°C</span>
+        </div>
+        <div className="flex items-center gap-1.5 text-white/60 text-[11px]">
+          <Droplets className="w-3 h-3" />
+          <span>{weather.humidity}%</span>
+        </div>
+        <div className="flex items-center gap-1.5 text-white/60 text-[11px]">
+          <Wind className="w-3 h-3" />
+          <span>{weather.windSpeed} km/h</span>
+        </div>
+        <div className="flex items-center gap-1.5 text-white/60 text-[11px]">
+          <Eye className="w-3 h-3" />
+          <span>{weather.visibility} km</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -140,20 +258,28 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* ---- Right side: Sustainable Tourism badge ---- */}
-      <motion.div
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-        className="absolute top-1/2 -translate-y-1/2 right-6 sm:right-10 md:right-16 z-20 hidden md:block"
-      >
-        <div className="bg-[#054906] text-white rounded-2xl p-5 max-w-[200px]">
-          <p className="font-bold text-sm">SUSTAINABLE TOURISM</p>
-          <p className="text-white/70 text-xs mt-1.5 leading-relaxed">
-            Stronger Communities, Brighter Future
-          </p>
-        </div>
-      </motion.div>
+      {/* ---- Right side: Weather + Sustainable Tourism ---- */}
+      <div className="absolute top-1/2 -translate-y-1/2 right-6 sm:right-10 md:right-16 z-20 hidden md:flex flex-col gap-4">
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+        >
+          <WeatherWidget />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+        >
+          <div className="bg-[#054906] text-white rounded-2xl p-5 max-w-[200px]">
+            <p className="font-bold text-sm">SUSTAINABLE TOURISM</p>
+            <p className="text-white/70 text-xs mt-1.5 leading-relaxed">
+              Stronger Communities, Brighter Future
+            </p>
+          </div>
+        </motion.div>
+      </div>
 
       {/* ---- Carousel arrows ---- */}
       <button
