@@ -215,7 +215,7 @@ export default function Navigation() {
             </div>
 
             {/* Right Side */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 relative z-20">
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
                 className="w-9 h-9 rounded-lg flex items-center justify-center text-[#222222] hover:text-[#054906] transition-colors"
