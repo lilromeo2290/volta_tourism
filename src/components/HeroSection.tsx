@@ -559,15 +559,16 @@ export default function HeroSection() {
       </div>
 
       {/* ---- Mobile widgets row (below lg breakpoint) ---- */}
-      <div className="lg:hidden absolute bottom-14 left-0 right-0 z-20 px-4">
-        <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory no-scrollbar -mx-1 px-1">
+      <div className="lg:hidden absolute bottom-40 left-0 right-0 z-25 px-4">
+        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-1 px-1">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
             className="snap-start shrink-0"
           >
-            <EnvironmentWidget />          </motion.div>
+            <EnvironmentWidget />
+          </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
