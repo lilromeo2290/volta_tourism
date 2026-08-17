@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronLeft, ChevronRight, MapPin, Calendar, CloudSun, Droplets, Wind, Eye, Thermometer, ArrowLeftRight, RefreshCw } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, MapPin, Calendar, CloudSun, Droplets, Wind, Eye, Thermometer, ArrowLeftRight, RefreshCw, Leaf, AlertTriangle, TreePine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { heroSlides, searchCategories } from "@/lib/vth-data";
 
@@ -324,6 +324,90 @@ function ForexWidget() {
   );
 }
 
+function EnvironmentWidget() {
+  const [activeFact, setActiveFact] = useState(0);
+
+  const facts = [
+    {
+      icon: <AlertTriangle className="w-3.5 h-3.5 text-[#EF4444]" />,
+      label: "Temp Rise",
+      value: "+1.1°C",
+      detail: "Global avg. since pre-industrial era",
+    },
+    {
+      icon: <TreePine className="w-3.5 h-3.5 text-[#F59E0B]" />,
+      label: "Land Degraded",
+      value: "40%",
+      detail: "Of Volta Region's land affected",
+    },
+    {
+      icon: <Droplets className="w-3.5 h-3.5 text-blue-400" />,
+      label: "Rainfall Shift",
+      value: "-15%",
+      detail: "Decline in seasonal rainfall pattern",
+    },
+    {
+      icon: <Leaf className="w-3.5 h-3.5 text-green-400" />,
+      label: "Forest Cover",
+      value: "~20%",
+      detail: "Remaining original forest cover",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveFact((prev) => (prev + 1) % facts.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [facts.length]);
+
+  return (
+    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[180px]">
+      <div className="flex items-center gap-2 mb-3">
+        <Leaf className="w-4 h-4 text-green-400" />
+        <p className="text-white/80 text-xs font-semibold uppercase tracking-wider">Environment</p>
+      </div>
+      <p className="text-white/50 text-[10px] mb-2.5">Climate & Land Awareness</p>
+
+      {/* Animated fact card */}
+      <div className="relative min-h-[72px]">
+        {facts.map((fact, idx) => (
+          <div
+            key={idx}
+            className={`absolute inset-0 transition-all duration-500 ${
+              idx === activeFact
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-2 pointer-events-none"
+            }`}
+          >
+            <div className="flex items-center gap-2 mb-1.5">
+              {fact.icon}
+              <span className="text-white/60 text-[10px] uppercase tracking-wider font-medium">{fact.label}</span>
+            </div>
+            <p className="text-2xl font-bold text-white leading-none">{fact.value}</p>
+            <p className="text-white/50 text-[10px] mt-1.5 leading-snug">{fact.detail}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Dot indicators */}
+      <div className="flex gap-1.5 mt-3 pt-3 border-t border-white/10">
+        {facts.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setActiveFact(idx)}
+            className={`block h-1.5 rounded-full transition-all duration-300 ${
+              idx === activeFact
+                ? "w-4 bg-green-400"
+                : "w-1.5 bg-white/30 hover:bg-white/50"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -448,22 +532,31 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* ---- Right side: Weather + Forex ---- */}
-      <div className="absolute top-1/2 -translate-y-1/2 right-6 sm:right-10 md:right-16 z-20 hidden md:flex flex-col gap-4">
+      {/* ---- Right side: Environment + Weather + Forex ---- */}
+      <div className="absolute top-1/2 -translate-y-1/2 right-6 sm:right-10 md:right-16 z-20 hidden md:flex items-end gap-4">
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
         >
-          <WeatherWidget />
+          <EnvironmentWidget />
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
-        >
-          <ForexWidget />
-        </motion.div>
+        <div className="flex flex-col gap-4">
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+          >
+            <WeatherWidget />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+          >
+            <ForexWidget />
+          </motion.div>
+        </div>
       </div>
 
       {/* ---- Carousel arrows ---- */}
