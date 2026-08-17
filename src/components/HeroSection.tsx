@@ -532,15 +532,14 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* ---- Right side: Environment + Weather + Forex ---- */}
+      {/* ---- Right side: Environment + Weather + Forex (desktop) ---- */}
       <div className="absolute top-1/2 -translate-y-1/2 right-6 sm:right-10 md:right-16 z-20 hidden lg:flex items-end gap-5">
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
         >
-          <EnvironmentWidget />
-        </motion.div>
+          <EnvironmentWidget />        </motion.div>
         <div className="flex flex-col gap-4">
           <motion.div
             initial={{ opacity: 0, x: 40 }}
@@ -553,6 +552,35 @@ export default function HeroSection() {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+          >
+            <ForexWidget />
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ---- Mobile widgets row (below lg breakpoint) ---- */}
+      <div className="lg:hidden absolute bottom-14 left-0 right-0 z-20 px-4">
+        <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory no-scrollbar -mx-1 px-1">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+            className="snap-start shrink-0"
+          >
+            <EnvironmentWidget />          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+            className="snap-start shrink-0"
+          >
+            <WeatherWidget />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+            className="snap-start shrink-0"
           >
             <ForexWidget />
           </motion.div>
