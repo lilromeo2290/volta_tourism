@@ -86,13 +86,13 @@ function WeatherWidget() {
 
   if (loading) {
     return (
-      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[200px] animate-pulse">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="w-8 h-8 rounded-full bg-white/10" />
-          <div className="h-3 w-24 bg-white/10 rounded" />
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 min-w-[250px] animate-pulse">
+        <div className="flex items-center gap-2.5 mb-3">
+          <div className="w-9 h-9 rounded-full bg-white/10" />
+          <div className="h-3.5 w-28 bg-white/10 rounded" />
         </div>
-        <div className="h-8 w-16 bg-white/10 rounded mb-2" />
-        <div className="h-2 w-32 bg-white/10 rounded" />
+        <div className="h-10 w-20 bg-white/10 rounded mb-2" />
+        <div className="h-2.5 w-36 bg-white/10 rounded" />
       </div>
     );
   }
@@ -100,33 +100,33 @@ function WeatherWidget() {
   if (!weather) return null;
 
   return (
-    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[200px]">
-      <div className="flex items-center gap-2 mb-3">
-        <CloudSun className="w-4 h-4 text-[#F59E0B]" />
-        <p className="text-white/80 text-xs font-semibold uppercase tracking-wider">Ho, Volta Region</p>
+    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 min-w-[250px]">
+      <div className="flex items-center gap-2.5 mb-3">
+        <CloudSun className="w-5 h-5 text-[#F59E0B]" />
+        <p className="text-white/80 text-sm font-semibold uppercase tracking-wider">Ho, Volta Region</p>
       </div>
-      <div className="flex items-start gap-3">
-        <span className="text-4xl leading-none">{weather.icon}</span>
+      <div className="flex items-start gap-3.5">
+        <span className="text-5xl leading-none">{weather.icon}</span>
         <div>
-          <p className="text-3xl font-bold text-white leading-none">{weather.temp}<span className="text-lg font-normal text-white/60">°C</span></p>
-          <p className="text-white/60 text-xs mt-1">{weather.condition}</p>
+          <p className="text-4xl font-bold text-white leading-none">{weather.temp}<span className="text-xl font-normal text-white/60">°C</span></p>
+          <p className="text-white/60 text-sm mt-1">{weather.condition}</p>
         </div>
       </div>
-      <div className="mt-3 pt-3 border-t border-white/10 grid grid-cols-2 gap-x-4 gap-y-1.5">
-        <div className="flex items-center gap-1.5 text-white/60 text-[11px]">
-          <Thermometer className="w-3 h-3" />
+      <div className="mt-3.5 pt-3.5 border-t border-white/10 grid grid-cols-2 gap-x-5 gap-y-2">
+        <div className="flex items-center gap-2 text-white/60 text-xs">
+          <Thermometer className="w-[18px] h-[18px]" />
           <span>Feels {weather.feelsLike}°C</span>
         </div>
-        <div className="flex items-center gap-1.5 text-white/60 text-[11px]">
-          <Droplets className="w-3 h-3" />
+        <div className="flex items-center gap-2 text-white/60 text-xs">
+          <Droplets className="w-[18px] h-[18px]" />
           <span>{weather.humidity}%</span>
         </div>
-        <div className="flex items-center gap-1.5 text-white/60 text-[11px]">
-          <Wind className="w-3 h-3" />
+        <div className="flex items-center gap-2 text-white/60 text-xs">
+          <Wind className="w-[18px] h-[18px]" />
           <span>{weather.windSpeed} km/h</span>
         </div>
-        <div className="flex items-center gap-1.5 text-white/60 text-[11px]">
-          <Eye className="w-3 h-3" />
+        <div className="flex items-center gap-2 text-white/60 text-xs">
+          <Eye className="w-[18px] h-[18px]" />
           <span>{weather.visibility} km</span>
         </div>
       </div>
@@ -207,43 +207,43 @@ function ForexWidget() {
 
   if (loading) {
     return (
-      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[240px] animate-pulse">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="w-5 h-5 rounded bg-white/10" />
-          <div className="h-3 w-28 bg-white/10 rounded" />
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 min-w-[280px] animate-pulse">
+        <div className="flex items-center gap-2.5 mb-3">
+          <div className="w-6 h-6 rounded bg-white/10" />
+          <div className="h-3.5 w-32 bg-white/10 rounded" />
         </div>
-        <div className="space-y-2">
-          <div className="h-3 w-full bg-white/10 rounded" />
-          <div className="h-3 w-full bg-white/10 rounded" />
-          <div className="h-3 w-3/4 bg-white/10 rounded" />
+        <div className="space-y-2.5">
+          <div className="h-3.5 w-full bg-white/10 rounded" />
+          <div className="h-3.5 w-full bg-white/10 rounded" />
+          <div className="h-3.5 w-3/4 bg-white/10 rounded" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[240px]">
+    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 min-w-[280px]">
       {/* Header with tab toggle */}
       <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <span className="text-sm">{CURRENCY_FLAGS.GHS}</span>
-          <p className="text-white/80 text-xs font-semibold uppercase tracking-wider">Forex</p>
+        <div className="flex items-center gap-2.5">
+          <span className="text-base">{CURRENCY_FLAGS.GHS}</span>
+          <p className="text-white/80 text-sm font-semibold uppercase tracking-wider">Forex</p>
         </div>
         <button
           onClick={() => setMode(mode === "rates" ? "convert" : "rates")}
-          className="text-[10px] font-semibold text-[#F59E0B] hover:text-[#FBBF24] transition-colors uppercase tracking-wider flex items-center gap-1"
+          className="text-[11px] font-semibold text-[#F59E0B] hover:text-[#FBBF24] transition-colors uppercase tracking-wider flex items-center gap-1"
         >
-          {mode === "rates" ? (<>Convert <ArrowLeftRight className="w-3 h-3" /></>) : (<>Rates <RefreshCw className="w-3 h-3" /></>)}
+          {mode === "rates" ? (<>Convert <ArrowLeftRight className="w-[18px] h-[18px]" /></>) : (<>Rates <RefreshCw className="w-[18px] h-[18px]" /></>)}
         </button>
       </div>
 
       {mode === "rates" ? (
         <>
-          <p className="text-white/50 text-[10px] mb-2.5">1 GHS equals</p>
-          <div className="space-y-1.5">
+          <p className="text-white/50 text-xs mb-3">1 GHS equals</p>
+          <div className="space-y-2">
             {ratesList.map(({ currency, rate, flag }) => (
-              <div key={currency} className="flex items-center justify-between text-white/80 text-xs">
-                <span className="flex items-center gap-1.5">
+              <div key={currency} className="flex items-center justify-between text-white/80 text-sm">
+                <span className="flex items-center gap-2">
                   <span>{flag}</span>
                   <span className="font-medium">{currency}</span>
                 </span>
@@ -253,15 +253,15 @@ function ForexWidget() {
           </div>
         </>
       ) : (
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {/* From */}
           <div>
-            <label className="text-white/50 text-[10px] uppercase tracking-wider mb-1 block">From</label>
-            <div className="flex gap-1.5">
+            <label className="text-white/50 text-xs uppercase tracking-wider mb-1.5 block">From</label>
+            <div className="flex gap-2">
               <select
                 value={fromCurrency}
                 onChange={(e) => setFromCurrency(e.target.value)}
-                className="h-9 w-[90px] appearance-none rounded-lg bg-white/10 border border-white/15 text-white text-xs pl-2 pr-1 focus:outline-none focus:border-[#F59E0B]/60 cursor-pointer"
+                className="h-10 w-[100px] appearance-none rounded-lg bg-white/10 border border-white/15 text-white text-sm pl-2.5 pr-1 focus:outline-none focus:border-[#F59E0B]/60 cursor-pointer"
               >
                 {CURRENCIES.map((c) => (
                   <option key={c} value={c} className="bg-gray-900 text-white">
@@ -274,7 +274,7 @@ function ForexWidget() {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="0.00"
-                className="h-9 flex-1 rounded-lg bg-white/10 border border-white/15 text-white text-xs pl-2.5 pr-2 placeholder:text-white/30 focus:outline-none focus:border-[#F59E0B]/60 min-w-0"
+                className="h-10 flex-1 rounded-lg bg-white/10 border border-white/15 text-white text-sm pl-3 pr-2.5 placeholder:text-white/30 focus:outline-none focus:border-[#F59E0B]/60 min-w-0"
               />
             </div>
           </div>
@@ -283,20 +283,20 @@ function ForexWidget() {
           <div className="flex justify-center">
             <button
               onClick={swapCurrencies}
-              className="h-7 w-7 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-white/70 hover:text-[#F59E0B] hover:border-[#F59E0B]/40 transition-colors"
+              className="h-8 w-8 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-white/70 hover:text-[#F59E0B] hover:border-[#F59E0B]/40 transition-colors"
             >
-              <ArrowLeftRight className="w-3.5 h-3.5" />
+              <ArrowLeftRight className="w-4 h-4" />
             </button>
           </div>
 
           {/* To */}
           <div>
-            <label className="text-white/50 text-[10px] uppercase tracking-wider mb-1 block">To</label>
-            <div className="flex gap-1.5">
+            <label className="text-white/50 text-xs uppercase tracking-wider mb-1.5 block">To</label>
+            <div className="flex gap-2">
               <select
                 value={toCurrency}
                 onChange={(e) => setToCurrency(e.target.value)}
-                className="h-9 w-[90px] appearance-none rounded-lg bg-white/10 border border-white/15 text-white text-xs pl-2 pr-1 focus:outline-none focus:border-[#F59E0B]/60 cursor-pointer"
+                className="h-10 w-[100px] appearance-none rounded-lg bg-white/10 border border-white/15 text-white text-sm pl-2.5 pr-1 focus:outline-none focus:border-[#F59E0B]/60 cursor-pointer"
               >
                 {CURRENCIES.map((c) => (
                   <option key={c} value={c} className="bg-gray-900 text-white">
@@ -304,7 +304,7 @@ function ForexWidget() {
                   </option>
                 ))}
               </select>
-              <div className="h-9 flex-1 rounded-lg bg-white/5 border border-white/10 text-white text-xs pl-2.5 pr-2 flex items-center min-w-0">
+              <div className="h-10 flex-1 rounded-lg bg-white/5 border border-white/10 text-white text-sm pl-3 pr-2.5 flex items-center min-w-0">
                 <span className={convertedAmount ? "text-white font-semibold" : "text-white/30"}>
                   {convertedAmount || "0.00"}
                 </span>
@@ -314,7 +314,7 @@ function ForexWidget() {
 
           {/* Rate hint */}
           {ratesMap[fromCurrency] && ratesMap[toCurrency] && amount && !isNaN(Number(amount)) && (
-            <p className="text-white/40 text-[10px] text-center pt-1">
+            <p className="text-white/40 text-xs text-center pt-1">
               1 {fromCurrency} = {convertCurrency(fromCurrency, toCurrency, 1).toFixed(4)} {toCurrency}
             </p>
           )}
@@ -329,25 +329,25 @@ function EnvironmentWidget() {
 
   const facts = [
     {
-      icon: <AlertTriangle className="w-3.5 h-3.5 text-[#EF4444]" />,
+      icon: <AlertTriangle className="w-[18px] h-[18px] text-[#EF4444]" />,
       label: "Temp Rise",
       value: "+1.1°C",
       detail: "Global avg. since pre-industrial era",
     },
     {
-      icon: <TreePine className="w-3.5 h-3.5 text-[#F59E0B]" />,
+      icon: <TreePine className="w-[18px] h-[18px] text-[#F59E0B]" />,
       label: "Land Degraded",
       value: "40%",
       detail: "Of Volta Region's land affected",
     },
     {
-      icon: <Droplets className="w-3.5 h-3.5 text-blue-400" />,
+      icon: <Droplets className="w-[18px] h-[18px] text-blue-400" />,
       label: "Rainfall Shift",
       value: "-15%",
       detail: "Decline in seasonal rainfall pattern",
     },
     {
-      icon: <Leaf className="w-3.5 h-3.5 text-green-400" />,
+      icon: <Leaf className="w-[18px] h-[18px] text-green-400" />,
       label: "Forest Cover",
       value: "~20%",
       detail: "Remaining original forest cover",
@@ -362,15 +362,15 @@ function EnvironmentWidget() {
   }, [facts.length]);
 
   return (
-    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[180px]">
-      <div className="flex items-center gap-2 mb-3">
-        <Leaf className="w-4 h-4 text-green-400" />
-        <p className="text-white/80 text-xs font-semibold uppercase tracking-wider">Environment</p>
+    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 min-w-[220px]">
+      <div className="flex items-center gap-2.5 mb-3">
+        <Leaf className="w-5 h-5 text-green-400" />
+        <p className="text-white/80 text-sm font-semibold uppercase tracking-wider">Environment</p>
       </div>
-      <p className="text-white/50 text-[10px] mb-2.5">Climate & Land Awareness</p>
+      <p className="text-white/50 text-xs mb-3">Climate & Land Awareness</p>
 
       {/* Animated fact card */}
-      <div className="relative min-h-[72px]">
+      <div className="relative min-h-[88px]">
         {facts.map((fact, idx) => (
           <div
             key={idx}
@@ -380,26 +380,26 @@ function EnvironmentWidget() {
                 : "opacity-0 translate-y-2 pointer-events-none"
             }`}
           >
-            <div className="flex items-center gap-2 mb-1.5">
+            <div className="flex items-center gap-2.5 mb-2">
               {fact.icon}
-              <span className="text-white/60 text-[10px] uppercase tracking-wider font-medium">{fact.label}</span>
+              <span className="text-white/60 text-xs uppercase tracking-wider font-medium">{fact.label}</span>
             </div>
-            <p className="text-2xl font-bold text-white leading-none">{fact.value}</p>
-            <p className="text-white/50 text-[10px] mt-1.5 leading-snug">{fact.detail}</p>
+            <p className="text-3xl font-bold text-white leading-none">{fact.value}</p>
+            <p className="text-white/50 text-xs mt-2 leading-snug">{fact.detail}</p>
           </div>
         ))}
       </div>
 
       {/* Dot indicators */}
-      <div className="flex gap-1.5 mt-3 pt-3 border-t border-white/10">
+      <div className="flex gap-2 mt-3.5 pt-3.5 border-t border-white/10">
         {facts.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setActiveFact(idx)}
-            className={`block h-1.5 rounded-full transition-all duration-300 ${
+            className={`block h-2 rounded-full transition-all duration-300 ${
               idx === activeFact
-                ? "w-4 bg-green-400"
-                : "w-1.5 bg-white/30 hover:bg-white/50"
+                ? "w-5 bg-green-400"
+                : "w-2 bg-white/30 hover:bg-white/50"
             }`}
           />
         ))}
@@ -533,7 +533,7 @@ export default function HeroSection() {
       </div>
 
       {/* ---- Right side: Environment + Weather + Forex ---- */}
-      <div className="absolute top-1/2 -translate-y-1/2 right-6 sm:right-10 md:right-16 z-20 hidden md:flex items-end gap-4">
+      <div className="absolute top-1/2 -translate-y-1/2 right-6 sm:right-10 md:right-16 z-20 hidden lg:flex items-end gap-5">
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
