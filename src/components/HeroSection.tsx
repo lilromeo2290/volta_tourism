@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronLeft, ChevronRight, MapPin, Calendar, CloudSun, Droplets, Wind, Eye, Thermometer } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, MapPin, Calendar, CloudSun, Droplets, Wind, Eye, Thermometer, ArrowLeftRight, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { heroSlides, searchCategories } from "@/lib/vth-data";
 
@@ -134,9 +134,18 @@ function WeatherWidget() {
   );
 }
 
+const CURRENCY_FLAGS: Record<string, string> = { GHS: "\uD83C\uDDEC\uD83C\uDDDD", USD: "\uD83C\uDDFA\uD83C\uDDF8", EUR: "\uD83C\uDEA7\uD83C\uDDFA", GBP: "\uD83C\uDCEC\uD83C\uDDE7", NGN: "\uD83C\uDDF3\uD83C\uDDEC", CNY: "\uD83C\uDDE8\uD83C\uDDF3" };
+const CURRENCY_NAMES: Record<string, string> = { GHS: "Cedi", USD: "US Dollar", EUR: "Euro", GBP: "Pound", NGN: "Naira", CNY: "Yuan" };
+const CURRENCIES = ["GHS", "USD", "EUR", "GBP", "NGN", "CNY"];
+
 function ForexWidget() {
-  const [rates, setRates] = useState<{ currency: string; rate: number; flag: string }[]>([]);
+  const [ratesMap, setRatesMap] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
+  const [mode, setMode] = useState<"rates" | "convert">("rates");
+  const [fromCurrency, setFromCurrency] = useState("USD");
+  const [toCurrency, setToCurrency] = useState("GHS");
+  const [amount, setAmount] = useState("");
+  const [convertedAmount, setConvertedAmount] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchRates = async () => {
@@ -145,19 +154,21 @@ function ForexWidget() {
           "https://api.frankfurter.app/latest?from=GHS&to=USD,EUR,GBP,NGN,CNY"
         );
         const data = await res.json();
-        const flags: Record<string, string> = { USD: "\uD83C\uDDFA\uD83C\uDDF8", EUR: "\uD83C\uDEA7\uD83C\uDDFA", GBP: "\uD83C\uDCEC\uD83C\uDDE7", NGN: "\uD83C\uDDF3\uD83C\uDDEC", CNY: "\uD83C\uDDE8\uD83C\uDDF3" };
-        const entries = Object.entries(data.rates).map(([currency, rate]) => ({
-          currency,
-          rate: 1 / (rate as number),
-          flag: flags[currency] || "\uD83C\uDFDB\uFE0F",
-        }));
-        setRates(entries);
+        // Store GHS->X rates, then invert so we have 1 X = ? GHS
+        const ghstoOther: Record<string, number> = {};
+        for (const [cur, rate] of Object.entries(data.rates)) {
+          ghstoOther[cur] = rate as number;
+        }
+        // 1 GHS = 1/USD_rate USD, etc.
+        const map: Record<string, number> = { GHS: 1 };
+        for (const cur of CURRENCIES) {
+          if (cur !== "GHS" && ghstoOther[cur]) {
+            map[cur] = 1 / ghstoOther[cur]; // how much of this currency per 1 GHS
+          }
+        }
+        setRatesMap(map);
       } catch {
-        setRates([
-          { currency: "USD", rate: 15.45, flag: "\uD83C\uDDFA\uD83C\uDDF8" },
-          { currency: "EUR", rate: 16.82, flag: "\uD83C\uDEA7\uD83C\uDDFA" },
-          { currency: "GBP", rate: 19.60, flag: "\uD83C\uDCEC\uD83C\uDDE7" },
-        ]);
+        setRatesMap({ GHS: 1, USD: 0.0647, EUR: 0.0595, GBP: 0.0510, NGN: 103.5, CNY: 0.466 });
       } finally {
         setLoading(false);
       }
@@ -167,9 +178,36 @@ function ForexWidget() {
     return () => clearInterval(interval);
   }, []);
 
+  const convertCurrency = (from: string, to: string, value: number): number => {
+    if (!ratesMap[from] || !ratesMap[to]) return 0;
+    // Convert value in 'from' to GHS first, then to 'to'
+    const inGHS = value / ratesMap[from];
+    return inGHS * ratesMap[to];
+  };
+
+  useEffect(() => {
+    if (mode === "convert" && amount && !isNaN(Number(amount))) {
+      const result = convertCurrency(fromCurrency, toCurrency, Number(amount));
+      setConvertedAmount(result.toFixed(2));
+    } else {
+      setConvertedAmount(null);
+    }
+  }, [amount, fromCurrency, toCurrency, mode, ratesMap]);
+
+  const swapCurrencies = () => {
+    setFromCurrency(toCurrency);
+    setToCurrency(fromCurrency);
+    setAmount(convertedAmount || "");
+  };
+
+  const ratesList = CURRENCIES.filter((c) => c !== "GHS").map((currency) => {
+    const rate = ratesMap[currency] ? 1 / ratesMap[currency] : 0;
+    return { currency, rate, flag: CURRENCY_FLAGS[currency] || "\uD83C\uDFDB\uFE0F" };
+  });
+
   if (loading) {
     return (
-      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[200px] animate-pulse">
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[240px] animate-pulse">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-5 h-5 rounded bg-white/10" />
           <div className="h-3 w-28 bg-white/10 rounded" />
@@ -184,23 +222,104 @@ function ForexWidget() {
   }
 
   return (
-    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[200px]">
-      <div className="flex items-center gap-2 mb-3">
-        <span className="text-sm">\uD83C\uDDEC\uD83C\uDDED</span>
-        <p className="text-white/80 text-xs font-semibold uppercase tracking-wider">Forex Rates</p>
+    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 min-w-[240px]">
+      {/* Header with tab toggle */}
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <span className="text-sm">{CURRENCY_FLAGS.GHS}</span>
+          <p className="text-white/80 text-xs font-semibold uppercase tracking-wider">Forex</p>
+        </div>
+        <button
+          onClick={() => setMode(mode === "rates" ? "convert" : "rates")}
+          className="text-[10px] font-semibold text-[#F59E0B] hover:text-[#FBBF24] transition-colors uppercase tracking-wider flex items-center gap-1"
+        >
+          {mode === "rates" ? (<>Convert <ArrowLeftRight className="w-3 h-3" /></>) : (<>Rates <RefreshCw className="w-3 h-3" /></>)}
+        </button>
       </div>
-      <p className="text-white/50 text-[10px] mb-2.5">1 GHS =</p>
-      <div className="space-y-1.5">
-        {rates.map(({ currency, rate, flag }) => (
-          <div key={currency} className="flex items-center justify-between text-white/80 text-xs">
-            <span className="flex items-center gap-1.5">
-              <span>{flag}</span>
-              <span className="font-medium">{currency}</span>
-            </span>
-            <span className="font-mono tabular-nums">{rate.toFixed(4)}</span>
+
+      {mode === "rates" ? (
+        <>
+          <p className="text-white/50 text-[10px] mb-2.5">1 GHS equals</p>
+          <div className="space-y-1.5">
+            {ratesList.map(({ currency, rate, flag }) => (
+              <div key={currency} className="flex items-center justify-between text-white/80 text-xs">
+                <span className="flex items-center gap-1.5">
+                  <span>{flag}</span>
+                  <span className="font-medium">{currency}</span>
+                </span>
+                <span className="font-mono tabular-nums">{rate.toFixed(4)}</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      ) : (
+        <div className="space-y-2.5">
+          {/* From */}
+          <div>
+            <label className="text-white/50 text-[10px] uppercase tracking-wider mb-1 block">From</label>
+            <div className="flex gap-1.5">
+              <select
+                value={fromCurrency}
+                onChange={(e) => setFromCurrency(e.target.value)}
+                className="h-9 w-[90px] appearance-none rounded-lg bg-white/10 border border-white/15 text-white text-xs pl-2 pr-1 focus:outline-none focus:border-[#F59E0B]/60 cursor-pointer"
+              >
+                {CURRENCIES.map((c) => (
+                  <option key={c} value={c} className="bg-gray-900 text-white">
+                    {CURRENCY_FLAGS[c]} {c}
+                  </option>
+                ))}
+              </select>
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="0.00"
+                className="h-9 flex-1 rounded-lg bg-white/10 border border-white/15 text-white text-xs pl-2.5 pr-2 placeholder:text-white/30 focus:outline-none focus:border-[#F59E0B]/60 min-w-0"
+              />
+            </div>
+          </div>
+
+          {/* Swap button */}
+          <div className="flex justify-center">
+            <button
+              onClick={swapCurrencies}
+              className="h-7 w-7 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-white/70 hover:text-[#F59E0B] hover:border-[#F59E0B]/40 transition-colors"
+            >
+              <ArrowLeftRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          {/* To */}
+          <div>
+            <label className="text-white/50 text-[10px] uppercase tracking-wider mb-1 block">To</label>
+            <div className="flex gap-1.5">
+              <select
+                value={toCurrency}
+                onChange={(e) => setToCurrency(e.target.value)}
+                className="h-9 w-[90px] appearance-none rounded-lg bg-white/10 border border-white/15 text-white text-xs pl-2 pr-1 focus:outline-none focus:border-[#F59E0B]/60 cursor-pointer"
+              >
+                {CURRENCIES.map((c) => (
+                  <option key={c} value={c} className="bg-gray-900 text-white">
+                    {CURRENCY_FLAGS[c]} {c}
+                  </option>
+                ))}
+              </select>
+              <div className="h-9 flex-1 rounded-lg bg-white/5 border border-white/10 text-white text-xs pl-2.5 pr-2 flex items-center min-w-0">
+                <span className={convertedAmount ? "text-white font-semibold" : "text-white/30"}>
+                  {convertedAmount || "0.00"}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Rate hint */}
+          {ratesMap[fromCurrency] && ratesMap[toCurrency] && amount && !isNaN(Number(amount)) && (
+            <p className="text-white/40 text-[10px] text-center pt-1">
+              1 {fromCurrency} = {convertCurrency(fromCurrency, toCurrency, 1).toFixed(4)} {toCurrency}
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
